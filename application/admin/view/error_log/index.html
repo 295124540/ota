@@ -1,67 +1,40 @@
-<style>
-    td button,td a{
-        margin: 5px 0 5px 0;
-        display: block;
-        width: 80px;
-    }
-</style>
 <div class="main_hd">
-    <h2>书库管理</h2>
+    <h2>错误日志</h2>
     <div class="title_tab">
         <ul class="tab_navs title_tab">
-            <li class="tab_nav first js_top  selected"><a href="javascript:void(0);" id="reloadTop">全部书籍</a></li>
-            <li class="tab_nav js_top"><a href="/admin/book/create" id="blackTop">书籍入库</a></li>
-            <li class="tab_nav js_top "><a href="javascript:;" >已租出</a></li>
+            <li class="tab_nav first js_top  {if condition='$type==null'} selected {/if}"><a href="/admin/error_log" id="reloadTop">全部日志</a></li>
+            <li class="tab_nav js_top {if condition='$type==1'} selected {/if}"><a href="/admin/error_log?type=1" id="blackTop">小程序日志</a></li>
+            <li class="tab_nav js_top {if condition='$type==2'} selected {/if}"><a href="/admin/error_log?type=2" >安卓日志</a></li>
+            <li class="tab_nav js_top {if condition='$type==3'} selected {/if}"><a href="/admin/error_log?type=3" >IOS日志</a></li>
         </ul>
     </div>
 </div>
 <div class="main_bd">
     <table class="city_list">
         <tr>
-            <td>编号</td>
-            <td>封面</td>
-            <td>书名</td>
-            <td>作者</td>
-            <td>简介</td>
-            <td width="80px">状态</td>
-            <td>二维码</td>
-            <td>操作</td>
+            <td width="50px">序号</td>
+            <td width="60px">来源</td>
+            <td width="360px">接口</td>
+            <td>信息</td>
+            <td>时间</td>
         </tr>
         {volist name="list" id = "x"}
         <tr>
-            <td>{$x.id}</td>
-            <td><img width="100px" height="150px" src="{$x.model.cover_img}"></td>
-            <td>{$x.model.name}</td>
-            <td>{$x.model.auther}</td>
-            <td>{$x.model.intro}</td>
+            <td>{$i+$perPage*($currentPage-1)}</td>
             <td>
-                {switch name="x.status"}
-                {case value="0"}<span style="color: #ff5500">未上架</span>{/case}
-                {case value="1"}<span style="color: #4FAB1C">已上架</span>{/case}
-                {case value="2"}已出租{/case}
-                {default /}
+                {switch name="x.type"}
+                {case value="0"}<span style="color: #ff5500">系统</span>{/case}
+                {case value="1"}<span style="color: #4FAB1C">小程序</span>{/case}
+                {case value="2"}安卓{/case}
+                {case value="3"}IOS{/case}
+                {default /}系统
                 {/switch}
             </td>
-            <td><img width="100px" src="/admin/book/qrcode/id/{$x.id}"></td>
-            <td>
-                <a class="btn btn_primary" href="javascript:;" onclick="putaway('{$x.id}')">上架</a>
-                <a class="btn btn_primary" href="/admin/book/edit/id/{$x.id}">修改</a>
-                <a class="btn" href="/admin/book/delete/id/{$x.id}">删除</a>
-            </td>
+            <td align="left">{$x.api}</td>
+            <td align="left">{$x.msg}</td>
+            <td>{$x.create_time|date="Y-m-d H:i:s",###}</td>
         </tr>
         {/volist}
     </table>
     <div class="page">{$list->render()}</div>
-
-    <script>
-        function  putaway(id) {
-            if(confirm("是否确认上架？")){
-                var param = {status:1};
-                $.post("/admin/book/update/id/"+id,param , function(data,status){
-                    window.location.href = '/admin/book';
-                });
-            }
-        }
-    </script>
-
 </div>

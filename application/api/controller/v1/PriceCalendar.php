@@ -5,9 +5,9 @@ use common\controller\ActiveController;
 use common\model\House as HouseModel;
 use common\model\Room as RoomModel;
 use common\model\PriceCalendar as PriceCalendarModel;
-use common\model\HotelReserve;
+use common\model\HotelReservation;
 
-class RoomPriceCalendar extends ActiveController
+class PriceCalendar extends ActiveController
 {
 
     protected $modelClass = 'common\model\RoomPriceCalendar';
@@ -28,11 +28,17 @@ class RoomPriceCalendar extends ActiveController
             if(!$roomModel){
                 error("该民宿没有此房间！");
             }
+            $reservation = HotelReservation::all(['hotel_id'=>$houseId,'room_id'=>$roomId]);
             $list = PriceCalendarModel::all(['house_id'=>$houseId,'room_id'=>$roomId,'type'=>0]);//单间
         }else{
+            $reservation = HotelReservation::all(['hotel_id'=>$houseId]);
             $list = PriceCalendarModel::all(['house_id'=>$houseId,'type'=>1]);//整套
         }
-        success($list);
+        $alreadyReservation = [];
+        foreach ($reservation as $value){
+            $alreadyReservation[] = $value['date'];
+        }
+        success(['already_reservation'=>$alreadyReservation,'price_calendar'=>$list]);
     }
 
     /**

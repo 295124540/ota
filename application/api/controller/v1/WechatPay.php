@@ -7,8 +7,9 @@ use Payment\ChargeContext;
 use Payment\Config;
 use Payment\Common\PayException;
 use common\model\Order as OrderModel;
+use common\model\BookRent as BookRentModel;
 
-class Pay extends ApiBaseController
+class WechatPay extends ApiBaseController
 {
     protected $beforeActionList = [
         'loginAuth' =>  ['except'=>'index'],
@@ -27,11 +28,11 @@ class Pay extends ApiBaseController
         $payData = [
             "order_no"	=> $order->id,
             //"amount"	=> $payMoney+200,//后面200是押金，支付通知成功时写入数据表
-            "amount"	=> 0.1,
+            "amount"	=> 0.01,
             "client_ip"	=> '127.0.0.1',
             "subject"	=> '在线支付',
             "body"	=> '云宿网络',
-            "extra_param"	=> '',
+            "extra_param"	=> '888888888888888888888888888888888',
             'timeout_express'	=> strtotime("+24 hours")//订单过期时间
         ];
 
@@ -59,13 +60,13 @@ class Pay extends ApiBaseController
             // $type = Config::WX_CHANNEL_QR;
 
             // 微信 APP支付
-            $type = Config::WX_CHANNEL_APP;
+            //$type = Config::WX_CHANNEL_APP;
 
             //微信 小程序支付
             $type = Config::WX_CHANNEL_LITE;
 
             // 微信 公众号支付
-            $type = Config::WX_CHANNEL_PUB;
+            //$type = Config::WX_CHANNEL_PUB;
 
 
             $charge->initCharge($type, $wxconfig);
@@ -88,4 +89,13 @@ class Pay extends ApiBaseController
 
     }
 
+    /**
+     * 支付租书押金
+     */
+    public function RentBookDeposit(){
+        $rentId = paramFromPost('rent_id',true);
+        $brm = BookRentModel::get(['id'=>$rentId,'user_id'=>$this->userId]);
+        if($brm == null);error("该书无法租用");
+
+    }
 }
