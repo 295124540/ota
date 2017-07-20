@@ -1,0 +1,40 @@
+{extend name="../admin/layout.html" /}
+{block name="content"}
+<div class="main_hd">
+    <h2>县市管理</h2>
+    <div class="title_tab">
+        <ul class="tab_navs title_tab">
+            <li class="tab_nav first js_top"><a href="{:url('index/cityList')}" id="reloadTop">县市列表</a></li>
+            <li class="tab_nav js_top selected"><a href="javascript:void(0);" id="blackTop">添加县市</a></li>
+        </ul>
+    </div>
+</div>
+<div class="main_bd">
+    <form class="form" action="{:url('index/doAddCity')}" method="post">
+    <div class="form_group">
+        <label>县市名称</label>
+        <input type="text" name="city_name"  />
+    </div>
+    <div class="form_group" >
+        <label>县市简介</label>
+        <script class="ueditor" id="container" name="city_desc" type="text/plain">
+               
+        </script>
+    </div>
+    <button class="btn btn_primary">提交</button>
+</form>
+
+</div>
+ 
+    <!-- 配置文件 -->
+    <script type="text/javascript" src="/ueditor/ueditor.config.js"></script>
+    <!-- 编辑器源码文件 -->
+    <script type="text/javascript" src="/ueditor/ueditor.all.js"></script>
+    <!-- 实例化编辑器 -->
+    <script type="text/javascript">
+        var ue = UE.getEditor('container',{
+            initialFrameWidth:800,
+            initialFrameHeight:300
+        });
+    </script>
+{/block}

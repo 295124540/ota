@@ -1,0 +1,267 @@
+<div class="main_hd">
+    <h2>智能民宿</h2>
+    <div class="title_tab">
+        <ul class="tab_navs title_tab">
+            <li class="tab_nav first js_top"><a href="/admin/house" id="reloadTop">全部民宿</a></li>
+            <li class="tab_nav js_top selected"><a href="javascript:;" id="blackTop">新增民宿</a></li>
+        </ul>
+    </div>
+</div>
+<div class="main_bd">
+
+    <form action="/admin/house/update/id/{$model.id}" enctype="multipart/form-data" method="post" class=" form goods_form goods_add_form">
+
+        <ul id="progressbar">
+            <li class="active">基础信息</li>
+            <li>套间信息</li>
+            <li>民宿详情</li>
+        </ul>
+
+        <fieldset>
+            <label>基础信息</label>
+            <div class="form_group">
+                <label>民宿名称</label><input  name="name" value="{$model.name}"  type="text" maxlength="15" />
+            </div>
+            <div class="form_group">
+                <label>基本价格</label><input  name="price" value="{$model.price}" type="number"  />
+            </div>
+            <div class="form_group">
+                <label>房源类型</label><input  name="house_type" value="{$model.house_type}"/>
+            </div>
+
+            <div class="form_group">
+                <label>房间数</label><input  name="room_num" value="{$model.room_num}"   type="number"  />
+            </div>
+            <div class="form_group">
+                <label>推荐理由</label><input  name="recommend_reason" value="{$model.recommend_reason}"  />
+            </div>
+
+            <div class="form_group">
+                <label>可住人数</label><input  name="dwell_num" value="{$model.dwell_num}" type="number"  />
+            </div>
+
+            <div class="form_group">
+                <label>入住时间</label><input  name="check_in_time" value="{$model.check_in_time}"/>
+            </div>
+
+            <div class="form_group">
+                <label>退房时间</label><input  name="check_out_time" value="{$model.check_out_time}" />
+            </div>
+
+            <div class="form_group">
+                <label>展示图片</label>
+                <div class="upload_img_box">
+                    {volist name="model.img" id="img"  }
+                    <div class="upload_img_label" >
+                        <img class='thumb'  src="{$img.url}"/>
+                        {in name="i" value="0"}
+                         <div class="ismain">*主图</div>
+                        {/in}
+                    </div>
+                    <input class="upload_img_input" accept="image/jpeg,image/jpg,image/png" type="file" name="image[]" />
+                    {/volist}
+                    {if condition="$i <='4'"}
+                        {for start="$i" end="3"}
+                            <div class="upload_img_label" ></div>
+                            <input class="upload_img_input" accept="image/jpeg,image/jpg,image/png" type="file" name="image[]" id="pic_1" />
+                        {/for}
+                    {/if}
+                </div>
+
+                <div class="form_group">
+                    <label>所在位置</label>
+                    <div id="r-result" style="margin-bottom: 10px">你要找的地点是：<input type="text" id="suggestId" size="20" /></div>
+                    <div id="searchResultPanel"
+                         style="border:1px solid #C0C0C0;width:150px;height:auto; display:none;"></div>
+
+                    <input required id="lat" name="lat" min="0" value="{$model.lng}" type="hidden"/>
+                    <input required id="lng" name="lng" min="0" value="{$model.lng}" type="hidden"/>
+
+                    <div class="dialog">
+
+                        <div id="map"></div>
+                        <script type="text/javascript"
+                                src="http://api.map.baidu.com/api?v=2.0&ak=LtCHl2DYmB4pe2nQ2fjA8X1zpWwsTYNK"></script>
+                        <script>
+                            var map = new BMap.Map("map"), MARKER = {};
+                            map.centerAndZoom(new BMap.Point("{$model.lng}","{$model.lat}"), 10);
+                            MARKER.marker = new BMap.Marker({
+                                lng:"{$model.lng}",
+                                lat:"{$model.lat}"
+                            });
+
+                            map.addOverlay(MARKER.marker);
+                            map.addControl(new BMap.NavigationControl());
+
+                            map.addEventListener("click", function (e) {
+
+                                document.getElementById('lng').value = e.point.lng
+                                document.getElementById('lat').value = e.point.lat
+                                if (MARKER.marker) {
+                                    map.removeOverlay(MARKER.marker)
+                                }
+
+                                MARKER.marker = new BMap.Marker(e.point);        // 创建标注
+                                map.addOverlay(MARKER.marker);                     // 将标注添加到地图中
+                            });
+
+
+                            // 百度地图API功能
+                            function G(id) {
+                                return document.getElementById(id);
+                            }
+
+
+                            var ac = new BMap.Autocomplete(    //建立一个自动完成的对象
+                                    {
+                                        "input": "suggestId"
+                                        , "location": map
+                                    });
+
+                            ac.addEventListener("onhighlight", function (e) {  //鼠标放在下拉列表上的事件
+                                var str = "";
+                                var _value = e.fromitem.value;
+                                var value = "";
+                                if (e.fromitem.index > -1) {
+                                    value = _value.province + _value.city + _value.district + _value.street + _value.business;
+                                }
+                                str = "FromItem<br />index = " + e.fromitem.index + "<br />value = " + value;
+
+                                value = "";
+                                if (e.toitem.index > -1) {
+                                    _value = e.toitem.value;
+                                    value = _value.province + _value.city + _value.district + _value.street + _value.business;
+                                }
+                                str += "<br />ToItem<br />index = " + e.toitem.index + "<br />value = " + value;
+                                G("searchResultPanel").innerHTML = str;
+                            });
+
+                            var myValue;
+                            ac.addEventListener("onconfirm", function (e) {    //鼠标点击下拉列表后的事件
+                                var _value = e.item.value;
+                                myValue = _value.province + _value.city + _value.district + _value.street + _value.business;
+                                G("searchResultPanel").innerHTML = "onconfirm<br />index = " + e.item.index + "<br />myValue = " + myValue;
+
+                                setPlace();
+                            });
+
+                            function setPlace() {
+                                console.log("setPlace")
+                               // map.clearOverlays();    //清除地图上所有覆盖物
+                                function myFun() {
+                                    var pp = local.getResults().getPoi(0).point;    //获取第一个智能搜索的结果
+                                    console.log("onconfirm" + pp.lng + ", " + pp.lat);
+                                    document.getElementById('lng').value = pp.lng
+                                    document.getElementById('lat').value = pp.lat
+                                    map.centerAndZoom(pp, 18);
+                                   // map.addOverlay(new BMap.Marker(pp));    //添加标注
+                                }
+
+                                var local = new BMap.LocalSearch(map, { //智能搜索
+                                    onSearchComplete: myFun
+                                });
+                                local.search(myValue);
+                            }
+
+                        </script>
+                    </div>
+
+                </div>
+
+
+            </div>
+            <div class="current_box">
+                <input type="button" name="next" class="next btn btn_primary"  value="继续" />
+            </div>
+        </fieldset>
+
+        <fieldset>
+
+            <div class="form_group">
+                <label>配套设施</label>
+                <div class="sku_box" style="overflow: hidden">
+                    {volist name="supportFacility" id="support"}
+                    <div class="suppor_item">
+                        <input name="support[]" {foreach $model.support as $v}
+                               {if condition="$support.id eq  $v.id"} checked="checked" {/if}
+                               {/foreach}  style="width: 20px" type="checkbox" value="{$support.id}" /><img width="40px" src="{$support.img}"><label>{$support.name}</label>
+                    </div>
+                    {/volist}
+                </div>
+            </div>
+            <div class="current_box">
+                <input type="button" name="previous" class="previous btn btn_primary " value="上一页" />
+                <input type="button" name="next" class="next btn btn_primary" value="继续" />
+            </div>
+        </fieldset>
+        <fieldset>
+
+            <div class="goods_desc_box form_group">
+                <label>详细介绍</label>
+                <script class="ueditor" id="container" name="describe" type="text/plain">{$model.describe}</script>
+                <script type="text/javascript" src="/ueditor/ueditor.config.js"></script>
+                <!-- 编辑器源码文件 -->
+                <script type="text/javascript" src="/ueditor/ueditor.all.js"></script>
+                <!-- 实例化编辑器 -->
+                <script type="text/javascript">
+                    var ue = UE.getEditor('container',{
+                        autoHeightEnabled: false,
+                        // initialFrameWidth:800,
+                        initialFrameHeight:600
+                    });
+                </script>
+            </div>
+            <div class="current_box">
+                <input type="button" name="previous" class="previous btn btn_primary  " value="上一页" />
+                <input type="button" onclick="submit()" name="next" class="next btn btn_primary " value="确认修改" />
+            </div>
+        </fieldset>
+    </form>
+</div>
+
+<script>
+
+    $(function() {
+
+        $(".upload_img_label").on('click',function(e){
+
+            var index = $(".upload_img_label").index(this);
+            $('.upload_img_input').eq(index).click();
+        })
+
+        $(".upload_img_input").on("change",function(){
+
+            var objUrl = getObjectURL(this.files[0]) ; //获取图片的路径，该路径不是图片在本地的路径
+            if (objUrl) {
+
+                var index = $(".upload_img_input").index(this);
+
+                var tempStr = "<img class='thumb'  />",
+                        $label = $(".upload_img_label").eq(index);
+
+                $label.append(tempStr);
+                console.log($label.find('img.thumb'));
+                $label.find('img.thumb').attr('src',objUrl);
+
+            }
+
+        });
+    });
+
+    function getObjectURL(file) {
+        var url = null ;
+        if (window.createObjectURL!=undefined) { // basic
+            url = window.createObjectURL(file) ;
+        } else if (window.URL!=undefined) { // mozilla(firefox)
+            url = window.URL.createObjectURL(file) ;
+        } else if (window.webkitURL!=undefined) { // webkit or chrome
+            url = window.webkitURL.createObjectURL(file) ;
+        }
+        return url ;
+    }
+
+    function submit(){
+        // return false;
+        document.form[0].submit();
+    }
+</script>

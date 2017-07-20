@@ -1,0 +1,53 @@
+<div class="main_hd">
+    <h2>捐书管理</h2>
+    <div class="title_tab">
+        <ul class="tab_navs title_tab">
+            <li class="tab_nav first js_top"><a href="/admin/book_donate" id="reloadTop">全部记录</a></li>
+            <li class="tab_nav js_top selected"><a href="javascript:;" id="blackTop">捐书入库</a></li>
+        </ul>
+    </div>
+</div>
+<div class="main_bd">
+    <form action="/admin/book/save" enctype="multipart/form-data" method="post" class=" form goods_form goods_add_form">
+
+        <fieldset>
+            <label>书籍信息</label>
+            <div class="form_group">
+                <label>书籍编码</label><input  name="encoding"  type="text" maxlength="15" />
+            </div>
+            <div class="form_group">
+                <label>书名</label><input  name="name"  type="text" maxlength="15" />
+            </div>
+
+            <div class="form_group">
+                <label>作者</label><input  name="auther" type="text" maxlength="15" />
+            </div>
+
+            <div class="form_group">
+                <label>出版社</label><input  name="publisher" type="text" maxlength="15" />
+            </div>
+
+
+            <div class="goods_desc_box form_group">
+                <label>书籍简介</label>
+                <script class="ueditor" id="container" name="intro" type="text/plain">商品简介
+            </script>
+                <script type="text/javascript" src="/ueditor/ueditor.config.js"></script>
+                <!-- 编辑器源码文件 -->
+                <script type="text/javascript" src="/ueditor/ueditor.all.js"></script>
+                <!-- 实例化编辑器 -->
+                <script type="text/javascript">
+                    var ue = UE.getEditor('container',{
+                        // initialFrameWidth:800,
+                        initialFrameHeight:500
+                    });
+                </script>
+            </div>
+            <div class="current_box">
+                <input type="button" name="previous" class="previous btn btn_primary  " value="上一页" />
+                <input type="button" onclick="submit()" name="next" class="next btn btn_primary " value="提交" />
+            </div>
+        </fieldset>
+        <!--<button class="submit">修改</button>-->
+    </form>
+</div>

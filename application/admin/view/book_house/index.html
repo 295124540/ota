@@ -1,0 +1,34 @@
+<div class="main_hd">
+    <h2>黄金书屋</h2>
+    <div class="title_tab">
+        <ul class="tab_navs title_tab">
+            <li class="tab_nav first js_top  selected"><a href="javascript:void(0);" id="reloadTop">全部书屋</a></li>
+            <li class="tab_nav js_top"><a href="/admin/book_house/create" id="blackTop">添加书屋</a></li>
+            <li class="tab_nav js_top "><a href="javascript:;" >营业中</a></li>
+        </ul>
+    </div>
+</div>
+<div class="main_bd">
+    <table class="city_list">
+        <tr>
+            <td>编号</td>
+            <td>书屋名</td>
+            <td>简介</td>
+            <td>书童</td>
+            <td>操作</td>
+        </tr>
+        {volist name="list" id = "x"}
+        <tr>
+            <td>{$x.id}</td>
+            <td>{$x.name}</td>
+            <td>{$x.intro}</td>
+            <td>小童仙</td>
+            <td>
+                <a class="btn btn_primary" href="/admin/book_house/edit/id/{$x.id}">修改</a>
+                <a class="btn" href="javascript:alert('你无权限哦！');">删除</a>
+            </td>
+        </tr>
+        {/volist}
+    </table>
+
+</div>

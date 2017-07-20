@@ -1,0 +1,109 @@
+{extend name="../admin/layout.html" /}
+{block name="content"}
+<div class="main_hd">
+    <h2>小镇管理</h2>
+    <div class="title_tab">
+        <ul class="tab_navs title_tab">
+            <li class="tab_nav first js_top"><a href="{:url('index/townList')}" id="reloadTop">小镇列表</a></li>
+            <li class="tab_nav js_top selected"><a href="javascript:void(0);" id="blackTop">添加小镇</a></li>
+        </ul>
+    </div>
+</div>
+<div class="main_bd">
+ 
+    <form action="{:url('index/doAddTown')}" enctype="multipart/form-data" method="post" class="town_editForm form"> 
+        <div class="form_group">
+            <label>所属县市</label> 
+            <select name="city_id">
+                {volist name="city_info" id="city"}
+                <option value="{$city.city_id}">{$city.city_name}</option>
+                {/volist}
+            </select>
+        </div>
+        <div class="form_group">
+            <label>小镇名称</label><input  name="town_name"  type="text"  />
+            
+        </div>
+        <div class="form_group">
+            <label>缩略图</label><input name="town_thumb" onchange="previewImage(this)"  type="file"  />
+           <div id="preview">  </div>  
+
+        </div>
+        <div class="desc_box form_group">
+        <label class="label_desc">小镇介绍</label> 
+        <script class="ueditor" id="container" name="town_desc" type="text/plain">
+                
+            </script>
+        </div>
+        <button class="submit">提交</button>
+    </form>
+
+</div>
+ 
+    <!-- 配置文件 -->
+    <script type="text/javascript" src="/ueditor/ueditor.config.js"></script>
+    <!-- 编辑器源码文件 -->
+    <script type="text/javascript" src="/ueditor/ueditor.all.js"></script>
+    <!-- 实例化编辑器 -->
+    <script type="text/javascript">
+        var ue = UE.getEditor('container',{
+            initialFrameWidth:800,
+            initialFrameHeight:300
+        });
+    </script>
+    <script>
+        function previewImage(file)  {  
+            var MAXWIDTH  = 200;  
+            var MAXHEIGHT = 100;  
+            var div = document.getElementById('preview');  
+            if (file.files && file.files[0])  {  
+                div.innerHTML = '<img id=imghead>';  
+                var img = document.getElementById('imghead');  
+                img.onload = function(){  
+                var rect = clacImgZoomParam(MAXWIDTH, MAXHEIGHT, img.offsetWidth, img.offsetHeight);  
+                img.width = rect.width;  
+                img.height = rect.height;  
+                img.style.marginLeft = rect.left+'px';  
+                img.style.marginTop = rect.top+'px';  
+                }  
+                var reader = new FileReader();  
+                reader.onload = function(evt){img.src = evt.target.result;}  
+                reader.readAsDataURL(file.files[0]);  
+            } else {  
+                var sFilter='filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(sizingMethod=scale,src="';  
+                file.select();  
+                var src = document.selection.createRange().text;  
+                div.innerHTML = '<img id=imghead>';  
+                var img = document.getElementById('imghead');  
+                img.filters.item('DXImageTransform.Microsoft.AlphaImageLoader').src = src;  
+                var rect = clacImgZoomParam(MAXWIDTH, MAXHEIGHT, img.offsetWidth, img.offsetHeight);  
+                status =('rect:'+rect.top+','+rect.left+','+rect.width+','+rect.height);  
+                div.innerHTML = "<div id=divhead style='width:"+rect.width+"px;height:"+rect.height+"px;margin-top:"+rect.top+"px;margin-left:"+rect.left+"px;"+sFilter+src+"\"'></div>";  
+            }  
+        }  
+        
+        function clacImgZoomParam( maxWidth, maxHeight, width, height ){  
+            var param = {top:0, left:0, width:width, height:height};  
+            if( width>maxWidth || height>maxHeight )  
+            {  
+                rateWidth = width / maxWidth;  
+                rateHeight = height / maxHeight;  
+                
+                if( rateWidth > rateHeight )  
+                {  
+                    param.width =  maxWidth;  
+                    param.height = Math.round(height / rateWidth);  
+                }else  
+                {  
+                    param.width = Math.round(width / rateHeight);  
+                    param.height = maxHeight;  
+                }  
+            }  
+            
+            param.left = Math.round((maxWidth - param.width) / 2);  
+            param.top = Math.round((maxHeight - param.height) / 2);  
+            return param;  
+        }  
+    </script>
+
+{/block}

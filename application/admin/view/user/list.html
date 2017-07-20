@@ -1,0 +1,50 @@
+<div class="main_hd">
+    <h2>运营管理者</h2>
+    <div class="title_tab">
+        <ul class="tab_navs title_tab">
+            <li class="tab_nav first js_top  selected"><a href="javascript:void(0);" id="reloadTop">人员列表</a></li>
+            <li class="tab_nav js_top"><a href="/admin/user/addAdmin" id="blackTop">添加管理者</a></li>
+        </ul>
+    </div>
+</div>
+<div class="main_bd">
+    <table class="city_list">
+        <tr>
+            <td>ID</td>
+            <td>姓名</td>
+            <td>邮箱</td>
+            <td>角色</td>
+            <td>操作</td>
+        </tr>
+        <tr>
+            <td>0</td>
+            <td>admin</td>
+            <td>admin</td>
+            <td>超级管理员</td>
+            <td>
+                不可删除
+            </td>
+        </tr>
+        {volist name="manager" id = "manager"}
+        <tr>
+            <td>{$manager.id}</td>
+            <td>{$manager.name}</td>
+            <td>{$manager.email}</td>
+            <td>
+                {switch name="$manager.role"}
+                {case value="0"}<span style="color: #ff5500">超级管理员</span>{/case}
+                {case value="1"}<span style="color: #4FAB1C">运维管理员</span>{/case}
+                {case value="2"}<span style="color: #4FAB1C">店家</span>{/case}
+                {case value="3"}<span style="color: #4FAB1C">书童</span>{/case}
+                {default /}
+                {/switch}
+            </td>
+            <td>
+                <a class="btn btn_primary" href="#">修改</a>
+                <a class="btn" href="#">删除</a>
+            </td>
+        </tr>
+        {/volist}
+    </table>
+
+</div>

@@ -1,0 +1,68 @@
+<style type="text/css">
+    *{margin:0;padding:0px;}
+    .calendar_btn{margin-top:100px;padding:0px 5px;width:250px;height:30px;line-height:30px;border-radius:3px;border:1px solid #ccc;cursor:pointer;text-align:center;}
+</style>
+<script>
+    function AjaxTime(houseId,roomId){
+        $.get("/api/room_price_calendar?house_id="+houseId+"&room_id="+roomId,function(data) {
+            if(data.code==100){
+                pickerEvent.setPriceArr(data.data);
+            }
+            pickerEvent.Init(houseId,roomId,"calendar_"+roomId,0);
+        });
+    }
+</script>
+<div class="main_hd">
+    <h2>客栈套间</h2>
+    <div class="title_tab">
+        <ul class="tab_navs title_tab">
+            <li class="tab_nav first js_top"><a href="/admin/house">全部民宿</a></li>
+            <li class="tab_nav first js_top"><a href="javascript:void(0);">营业中</a></li>
+            <li class="tab_nav first js_top"><a href="javascript:void(0);">最受欢迎</a></li>
+            <li class="tab_nav first js_top selected"><a href="javascript:void(0);">套间管理</a></li>
+        </ul>
+    </div>
+</div>
+<div class="main_bd">
+    <a class="btn btn_primary" href="/admin/room/create?house_id={$houseId}">添加套间</a>
+    <table class="goods_list hotel_list">
+        <tbody><tr>
+            <th>套间ID</th>
+            <th>套间名称</th>
+            <th>套间主题</th>
+            <th>平时价格（元）</th>
+            <th>操作</th>
+        </tr>
+        {volist name="list" id="model"}
+        <tr>
+            <td>202</td>
+            <td class="name">{$model.name}</td>
+            <td>{$model.theme}</td>
+            <td>{$model.price}</td>
+            <td>
+                <input id="calendar_{$model.id}" class="calendar_btn" name="calendar" readonly="readonly" onclick="AjaxTime('{$houseId}','{$model.id}');" placeholder="价格日历"/>
+                <!--<a href="javascript:;" class="md-trigger btn btn-primary btn-sm" data-modal="modal-1">价格日历</a> -->
+                <a class="btn btn_primary" href="/admin/room/edit/id/{$model.id}?house_id={$houseId}">编辑</a>
+                <a class="btn btn_primary" href="/admin/room/delete/id/{$model.id}?house_id={$houseId}">删除</a>
+            </td>
+        </tr>
+        {/volist}
+        </tbody>
+    </table>
+
+    <div class="md-modal md-effect-1" id="modal-1">
+        <div class="md-content">
+            <h3>Modal Dialog</h3>
+            <div>
+                <p>This is a modal window. You can do the following things with it:</p>
+                <ul>
+                    <li><strong>Read:</strong> modal windows will probably tell you something important so don't forget to read what they say.</li>
+                    <li><strong>Look:</strong> a modal window enjoys a certain kind of attention; just look at it and appreciate its presence.</li>
+                    <li><strong>Close:</strong> click on the button below to close the modal.</li>
+                </ul>
+                <button class="md-close btn-sm btn-primary">Close me!</button>
+            </div>
+        </div>
+    </div>
+    <div class="md-overlay"></div>
+</div>

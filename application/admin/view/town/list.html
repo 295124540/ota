@@ -1,0 +1,66 @@
+{extend name="../admin/layout.html" /}
+{block name="content"}
+<div class="main_hd">
+    <h2>小镇管理</h2>
+    <div class="title_tab">
+        <ul class="tab_navs title_tab">
+            <li class="tab_nav first js_top selected"><a href="javascript:void(0);" id="reloadTop">小镇列表</a></li>
+            <li class="tab_nav js_top"><a href="{:url('index/addTown')}" id="blackTop">添加小镇</a></li>
+        </ul>
+    </div>
+</div>
+<div class="main_bd">
+
+    <table class="city_list" cellpadding="0" cellspacing="0">
+        {volist name="city_info" id="city"}
+        {if $city.townLen>0}
+            <tr>
+                <td rowspan="{$city.townLen}">{$city.city_name}</td>
+                <td>{$city['townList'][0]['town_name'] }</td>
+                <td>
+                    <a href="#" class="btn " >删除 </a>
+                    <a href="#" class="btn btn_primary" >修改 </a>
+                </td>
+            </tr>
+            
+
+            {volist name="$city.townList" id="town"}
+            {if $town.town_name != $city['townList'][0]['town_name']}
+                <tr>
+
+                    <td>{$town.town_name}</td>
+                    <td>
+                        <a href="#" class="btn " >删除 </a>
+                        <a href="#" class="btn btn_primary" >修改 </a>
+                    </td>
+                </tr>
+                {/if}
+            {/volist}
+        {/if}
+        {/volist}
+        
+        <!--<tr>
+            <td>海口市</td>
+            <td>
+                <a href="#" class="btn " >删除 </a>
+                <a href="#" class="btn btn_primary" >修改 </a>
+            </td>
+        </tr>
+        <tr>
+            <td>海口市</td>
+            <td>
+                <a href="#" class="btn " >删除 </a>
+                <a href="#" class="btn btn_primary" >修改 </a>
+            </td>
+        </tr>
+        <tr>
+            <td>海口市</td>
+            <td>
+                <a href="#" class="btn " >删除 </a>
+                <a href="#" class="btn btn_primary" >修改 </a>
+            </td>
+        </tr>-->
+    </table>
+</div>
+ 
+{/block}

@@ -1,0 +1,163 @@
+<div class="main_hd">
+    <h2>书屋管理</h2>
+    <div class="title_tab">
+        <ul class="tab_navs title_tab">
+            <li class="tab_nav first js_top"><a href="/admin/book_house" id="reloadTop">全部书屋</a></li>
+            <li class="tab_nav js_top selected"><a href="javascript:;" id="blackTop">新增书屋</a></li>
+            <li class="tab_nav js_top "><a href="javascript:;" >营业中</a></li>
+        </ul>
+    </div>
+</div>
+<div class="main_bd">
+
+    <form action="/admin/book_house/save" enctype="multipart/form-data" method="post" class=" form goods_form goods_add_form">
+
+        <ul id="progressbar">
+            <li class="active">基础信息</li>
+            <li>位置信息</li>
+            <li>书屋简介</li>
+        </ul>
+
+        <fieldset>
+            <label>基础信息</label>
+            <div class="form_group">
+                <label>书屋名称</label><input  name="name"  type="text" maxlength="15" />
+            </div>
+
+            <div class="form_group">
+                <label>书童</label>
+                <select name="child_id">
+                    {volist name="list" id="user"}
+                    <option selected value="{$user.id}">{$user.name}</option>
+                    {/volist}
+                </select>
+            </div>
+
+            <div class="form_group">
+                <label>负责单位</label><input  type="text" maxlength="15" />
+            </div>
+
+            <div class="current_box">
+                <input type="button" name="next" class="next btn btn_primary"  value="继续" />
+            </div>
+        </fieldset>
+
+        <fieldset>
+            <div class="form_group">
+                <label>负责单位</label><input name="location"  maxlength="50" />
+            </div>
+            <div class="form_group">
+                <div class="dialog">
+                    <div id="map"></div>
+                    <script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=LtCHl2DYmB4pe2nQ2fjA8X1zpWwsTYNK" ></script>
+                    <!--<script type="text/javascript" src="http://api.map.baidu.com/library/SearchControl/1.4/src/SearchControl.js" ></script>-->
+                    <script>
+                        var map = new BMap.Map("map"),MARKER={};
+                        map.centerAndZoom(new BMap.Point(110.305309,20.025742), 10);
+                        map.addControl(new BMap.NavigationControl());
+                        // var searchControl = new BMapLib.SearchControl({
+                        //     container : "searchBox" //存放控件的容器
+                        //     , map     : map  //关联地图对象
+                        //     , type    : 'LOCAL_SEARCH'  //检索类型
+                        // });
+
+                        map.addEventListener("click", function(e){
+
+                            // alert("您点击的位置是"+e.point.lat+' '+e.point.lng);
+                            document.getElementById('lng').value = e.point.lng
+                            document.getElementById('lat').value = e.point.lat
+                            if(MARKER.marker){
+                                map.removeOverlay(MARKER.marker)
+                            }
+
+                            console.log(e.point.lng + ", " + e.point.lat);
+                            MARKER.marker = new BMap.Marker(e.point);        // 创建标注
+                            map.addOverlay(MARKER.marker);                     // 将标注添加到地图中
+                        });
+                    </script>
+                </div>
+                <input required  id="lat"  name="lat" min="0"  type="hidden"  />
+                <input required  id="lng"  name="lng" min="0"  type="hidden"  />
+
+            </div>
+            <div class="current_box">
+                <input type="button" name="previous" class="previous btn btn_primary " value="上一页" />
+                <input type="button" name="next" class="next btn btn_primary" value="继续" />
+            </div>
+        </fieldset>
+        <fieldset>
+
+            <div class="goods_desc_box form_group">
+                <label>详细介绍</label>
+                <script class="ueditor" id="container" name="intro" type="text/plain">商品简介
+            </script>
+                <script type="text/javascript" src="/ueditor/ueditor.config.js"></script>
+                <!-- 编辑器源码文件 -->
+                <script type="text/javascript" src="/ueditor/ueditor.all.js"></script>
+                <!-- 实例化编辑器 -->
+                <script type="text/javascript">
+                    var ue = UE.getEditor('container',{
+                        // initialFrameWidth:800,
+                        // initialFrameHeight:300
+                    });
+                </script>
+            </div>
+            <div class="current_box">
+                <input type="button" name="previous" class="previous btn btn_primary  " value="上一页" />
+                <input type="button" onclick="submit()" name="next" class="next btn btn_primary " value="提交" />
+            </div>
+        </fieldset>
+        <!--<button class="submit">修改</button>-->
+    </form>
+</div>
+
+<script src="//cdn.bootcss.com/jquery/1.12.4/jquery.min.js"></script>
+<script src="/static/js/jquery.easing.min.js" type="text/javascript"></script>
+<script src="/static/js/zzsc.js" type="text/javascript"></script>
+
+<script>
+
+    $(function() {
+
+        $(".upload_img_label").on('click',function(e){
+
+            var index = $(".upload_img_label").index(this);
+            $('.upload_img_input').eq(index).click();
+        })
+
+        $(".upload_img_input").on("change",function(){
+
+            var objUrl = getObjectURL(this.files[0]) ; //获取图片的路径，该路径不是图片在本地的路径
+            if (objUrl) {
+
+                var index = $(".upload_img_input").index(this);
+
+                var tempStr = "<img class='thumb'  />",
+                        $label = $(".upload_img_label").eq(index);
+
+                $label.append(tempStr);
+                console.log($label.find('img.thumb'));
+                $label.find('img.thumb').attr('src',objUrl);
+
+            }
+
+        });
+    });
+
+    function getObjectURL(file) {
+        var url = null ;
+        if (window.createObjectURL!=undefined) { // basic
+            url = window.createObjectURL(file) ;
+        } else if (window.URL!=undefined) { // mozilla(firefox)
+            url = window.URL.createObjectURL(file) ;
+        } else if (window.webkitURL!=undefined) { // webkit or chrome
+            url = window.webkitURL.createObjectURL(file) ;
+        }
+        return url ;
+    }
+
+    function submit(){
+        // return false;
+        document.form[0].submit();
+    }
+</script>

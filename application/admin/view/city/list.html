@@ -1,0 +1,33 @@
+{extend name="../admin/layout.html" /}
+{block name="content"}
+<div class="main_hd">
+    <h2>县市管理</h2>
+    <div class="title_tab">
+        <ul class="tab_navs title_tab">
+            <li class="tab_nav first js_top selected"><a href="javascript:void(0);" id="reloadTop">县市列表</a></li>
+            <li class="tab_nav js_top"><a href="{:url('index/addCity')}" id="blackTop">添加县市</a></li>
+        </ul>
+    </div>
+</div>
+<div class="main_bd">
+
+    <table class="city_list" cellpadding="0" cellspacing="0">
+        <tr>
+            <td>序号</td>
+            <td>县市名称</td>
+            <td>操作</td>
+        </tr>
+        {volist name="cityList" id="city"}
+        <tr>
+            <td>{$city.city_id}</td>
+            <td>{$city.city_name}</td>
+            <td>
+                <a href="{:url('index/doDelCity','id='.$city.city_id)}" class="btn " >删除 </a>
+                <a href="{:url('index/EditCity','id='.$city.city_id)}" class="btn btn_primary" >修改 </a>
+            </td>
+        </tr>
+        {/volist}
+       
+    </table>
+</div>
+ {/block}

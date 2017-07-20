@@ -1,0 +1,87 @@
+<div class="main_hd">
+    <h2>订单管理</h2>
+    <div class="title_tab">
+        <ul class="tab_navs title_tab">
+            <li class="tab_nav first js_top {if condition='$type==null'} selected {/if}"><a href="/admin/order">全部订单</a></li>
+            <li class="tab_nav first js_top {if condition='$type=="0"'} selected {/if}"><a href="/admin/order?type=0">待支付</a></li>
+            <li class="tab_nav first js_top {if condition='$type==1'} selected {/if}"><a href="/admin/order?type=1">待消费</a></li>
+            <li class="tab_nav first js_top {if condition='$type==2'} selected {/if}"><a href="/admin/order?type=2">待退房</a></li>
+            <li class="tab_nav first js_top {if condition='$type==3'} selected {/if}"><a href="/admin/order?type=3">待评价</a></li>
+            <li class="tab_nav first js_top {if condition='$type==4'} selected {/if}"><a href="/admin/order?type=4">已完成</a></li>
+        </ul>
+    </div>
+</div>
+<div class="main_bd">
+    <table class="goods_list hotel_list" style="width: 100%;border-collapse:collapse;">
+        <tbody><tr>
+            <th>订单ID</th>
+            <th>用户</th>
+            <th>订单描述</th>
+            <th>支付金额</th>
+            <th>订单状态</th>
+            <th>下单时间</th>
+            <th>操作</th>
+        </tr>
+        {volist name="list" id="model"}
+        <tr  style="border-bottom:1px solid #eee;height:80px;">
+            <td>55659263598{$model.id}</td>
+            <td>{$model.user_name}</td>
+            <td>
+                {switch name="model.type"}
+                {case value="1"}预定了民宿{$model.describe}{/case}
+                {case value="2"}购买书本{$model.describe}{/case}
+                {default /}
+                {/switch}
+            </td>
+            <td>{$model.pay_money}</td>
+            <td>
+                {switch name="model.status"}
+                {case value="-1"}<span style="color: #ff5500">已取消</span>{/case}
+                {case value="0"}<span style="color: #ff5500">待支付</span>{/case}
+                {case value="1"}<span style="color: #4FAB1C">待消费</span>{/case}
+                {case value="2"}<span style="color: #4FAB1C">待退房</span>{/case}
+                {case value="3"}<span style="color: #4FAB1C">待评价</span>{/case}
+                {case value="4"}<span style="color: #4FAB1C">已完成</span>{/case}
+                {default /}订单异常
+                {/switch}
+            </td>
+            <td>{$model.create_time|date='Y-m-d H:i:s',###}</td>
+            <td>
+
+                {switch name="type" }
+                {case value="2"}
+                <button class="btn btn_primary" onclick="checkOut({$model.id},1)">同意退房</button>
+                <button class="btn btn_primary"onclick="checkOut({$model.id},2)">扣取押金</button>
+                {/case}
+                {case value="值2"}{/case}
+                {default /}<a class="btn btn_primary" href="/admin/order/read/id/{$model.id}">详情</a>
+                {/switch}
+            </td>
+        </tr>
+        {/volist}
+        </tbody>
+    </table>
+    <div class="page">{$list->render()}</div>
+</div>
+<script>
+    function checkOut(id,action) {
+        var params = {};
+        if(action==1){
+            if(!confirm("是否确认退房？"))return;
+            params = {status:3};
+        }
+        if(action==2){
+            var name = prompt("请输入需要扣取的押金！");
+            var patrn = /^(-)?\d+(\.\d+)?$/;
+            if(name==""||name==null)return;
+            if (patrn.exec(name) == null) {
+                alert("输入错误！");
+                return ;
+            }
+            params = {status:3};
+        }
+        $.post("/admin/order/update/id/"+id,params, function(data,status){
+            window.location.reload();
+        });
+    }
+</script>

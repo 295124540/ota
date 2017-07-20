@@ -1,0 +1,32 @@
+<div class="main_hd">
+    <h2>租书记录</h2>
+    <div class="title_tab">
+        <ul class="tab_navs title_tab">
+            <li class="tab_nav first js_top  selected"><a href="javascript:void(0);" id="reloadTop">全部记录</a></li>
+            <li class="tab_nav js_top"><a href="#" id="blackTop">出租中</a></li>
+        </ul>
+    </div>
+</div>
+<div class="main_bd">
+    <table class="city_list">
+        <tr>
+            <td>序号</td>
+            <td>租书人</td>
+            <td>书名</td>
+            <td>经办人</td>
+            <td>状态</td>
+            <td>租书时间</td>
+        </tr>
+        {volist name="list" id = "x"}
+        <tr>
+            <td>{$i+$perPage*($currentPage-1)}</td>
+            <td>{$x.user_name}</td>
+            <td>{$x.book.model.name}</td>
+            <td>{$x.operator}</td>
+            <td>{$x.status?'已归还':'未归还'}</td>
+            <td>{$x.rent_time|date='Y-m-d H:i',###}</td>
+        </tr>
+        {/volist}
+    </table>
+    <div class="page">{$list->render()}</div>
+</div>

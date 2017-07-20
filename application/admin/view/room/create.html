@@ -1,0 +1,133 @@
+<div class="main_hd">
+    <h2>添加套间</h2>
+    <div class="title_tab">
+        <ul class="tab_navs title_tab">
+            <li class="tab_nav first js_top"><a href="/admin/house">全部民宿</a></li>
+            <li class="tab_nav first js_top"><a href="javascript:void(0);">营业中</a></li>
+            <li class="tab_nav first js_top"><a href="javascript:void(0);">最受欢迎</a></li>
+            <li class="tab_nav first js_top"><a href="javascript:history.back();">套间管理</a></li>
+            <li class="tab_nav first js_top selected"><a href="javascript:void(0);">添加套间</a></li>
+        </ul>
+    </div>
+</div>
+<div class="main_bd">
+
+    <form action="/admin/room/save?house_id={$_GET['house_id']}" enctype="multipart/form-data" method="post" class=" form goods_form goods_add_form">
+        <input type="hidden" name="house_id" value="{$_GET['house_id']}">
+        <div class="form_group">
+            <label>套间主题</label>
+            <select name="theme">
+                {volist name="typeList" id="type"}
+                {if $type.id==1}
+                 <option selected value="{$type.name}">{$type.name}</option>
+                 {else}
+                 <option value="{$type.name}">{$type.name}</option>
+                {/if}
+               {/volist}
+            </select>
+
+        </div>
+        <div class="form_group">
+            <label>套间名称</label><input  name="name"  type="text" maxlength="15" />
+        </div>
+        <div class="form_group">
+            <label>床位</label><input  name="bed"  type="text" maxlength="20" />
+        </div>
+        <div class="form_group">
+            <label>平时价格</label><input  name="price" maxlength="5"   />
+        </div>
+        <div class="form_group">
+            <label>可住人数</label><input  name="accept_num" maxlength="2"  />
+        </div>
+       
+        <div class="form_group">
+            <label>套间图片</label>
+            <div class="upload_img_box">
+              
+                <div class="upload_img_label" ><div class="ismain">*主图</div></div>
+                <input class="upload_img_input" accept="image/jpeg,image/jpg,image/png" type="file" name="image[]" />
+                <div class="upload_img_label" ></div>
+                <input class="upload_img_input" accept="image/jpeg,image/jpg,image/png" type="file" name="image[]" id="pic_1" />
+                <div class="upload_img_label" ></div>
+                <input class="upload_img_input" accept="image/jpeg,image/jpg,image/png" type="file" name="image[]" id="pic_2" />
+                <div class="upload_img_label" ></div>
+                <input class="upload_img_input" accept="image/jpeg,image/jpg,image/png" type="file" name="image[]" id="pic_3" />
+                <div class="upload_img_label" ></div>
+                <input class="upload_img_input" accept="image/jpeg,image/jpg,image/png" type="file" name="image[]" id="pic_4" />
+            </div>
+        </div>
+
+                    
+        <div class="goods_desc_box form_group">
+            <label>套间介绍</label>
+            <script class="ueditor" id="container" name="intro" type="text/plain">套间简要介绍说明！</script>
+            <script type="text/javascript" src="/ueditor/ueditor.config.js"></script>
+            <!-- 编辑器源码文件 -->
+            <script type="text/javascript" src="/ueditor/ueditor.all.js"></script>
+            <!-- 实例化编辑器 -->
+            <script type="text/javascript">
+                var ue = UE.getEditor('container',{
+                    // initialFrameWidth:800,
+                    // initialFrameHeight:300
+                });
+            </script>
+        </div>
+
+        <div class="current_box">
+            <input type="button" onclick="submit()" name="next" class="next btn btn_primary " value="确认添加" />
+        </div>
+
+        <!--<button class="submit">修改</button>-->
+    </form>
+</div>
+
+<script>
+    
+   
+
+
+    $(function() {
+
+        $(".upload_img_label").on('click',function(e){
+
+            var index = $(".upload_img_label").index(this);
+            $('.upload_img_input').eq(index).click();
+        })
+
+        $(".upload_img_input").on("change",function(){
+
+            var objUrl = getObjectURL(this.files[0]) ; //获取图片的路径，该路径不是图片在本地的路径
+            if (objUrl) {
+
+                var index = $(".upload_img_input").index(this);
+               
+                var tempStr = "<img class='thumb'  />",
+                $label = $(".upload_img_label").eq(index);
+
+                $label.append(tempStr);
+                console.log($label.find('img.thumb'));
+                $label.find('img.thumb').attr('src',objUrl);
+             
+            }
+
+        });
+    });
+
+    function getObjectURL(file) {
+        var url = null ;
+        if (window.createObjectURL!=undefined) { // basic
+            url = window.createObjectURL(file) ;
+        } else if (window.URL!=undefined) { // mozilla(firefox)
+            url = window.URL.createObjectURL(file) ;
+        } else if (window.webkitURL!=undefined) { // webkit or chrome
+            url = window.webkitURL.createObjectURL(file) ;
+        }
+        return url ;
+    }
+
+
+    function submit(){
+        // return false;
+        document.form[0].submit();
+    }
+</script>

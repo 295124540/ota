@@ -1,0 +1,33 @@
+<div class="main_hd">
+    <h2>书童理者</h2>
+    <div class="title_tab">
+        <ul class="tab_navs title_tab">
+            <li class="tab_nav first js_top  selected"><a href="/admin/user/child" id="reloadTop">书童列表</a></li>
+            <li class="tab_nav js_top"><a href="/admin/user/addChild">添加书童</a></li>
+        </ul>
+    </div>
+</div>
+<div class="main_bd">
+    <table class="city_list">
+        <tr>
+            <td>ID</td>
+            <td>姓名</td>
+            <td>邮箱</td>
+            <td>角色</td>
+            <td>操作</td>
+        </tr>
+        {volist name="list" id = "x"}
+        <tr>
+            <td>{$x.id}</td>
+            <td>{$x.name}</td>
+            <td>{$x.email}</td>
+            <td>普通管理员</td>
+            <td>
+                <a class="btn btn_primary" href="/admin/user/updChild/id/{$x.id}">修改</a>
+                <a class="btn" href="/admin/user/delete/id/{$x.id}">删除</a>
+            </td>
+        </tr>
+        {/volist}
+    </table>
+
+</div>

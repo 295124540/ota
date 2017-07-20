@@ -1,0 +1,31 @@
+<div class="main_hd">
+    <h2>设施信息</h2>
+    <div class="title_tab">
+        <ul class="tab_navs title_tab">
+            <li class="tab_nav first js_top  selected"><a href="javascript:void(0);" id="reloadTop">全部设施</a></li>
+            <li class="tab_nav js_top"><a href="/admin/support_facility/create" id="blackTop">新增设施</a></li>
+        </ul>
+    </div>
+</div>
+<div class="main_bd">
+    <table class="city_list">
+        <tr>
+            <td>设施编号</td>
+            <td>名称</td>
+            <td>图片</td>
+            <td>操作</td>
+        </tr>
+        {volist name="list" id = "x"}
+        <tr>
+            <td>{$x.id}</td>
+            <td>{$x.name}</td>
+            <td><img src="{$x.img}" width="100px" height="100px"></td>
+            <td>
+                <a class="btn btn_primary" href="/admin/support_facility/edit/id/{$x.id}">修改</a>
+                <a class="btn" href="javascript:void(0);">删除</a>
+            </td>
+        </tr>
+        {/volist}
+    </table>
+
+</div>

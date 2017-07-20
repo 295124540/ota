@@ -1,0 +1,48 @@
+<div class="main_hd">
+    <h2>捐书管理</h2>
+    <div class="title_tab">
+        <ul class="tab_navs title_tab">
+            <li class="tab_nav first js_top  selected"><a href="javascript:void(0);" id="reloadTop">全部记录</a></li>
+        </ul>
+    </div>
+</div>
+<div class="main_bd">
+    <table class="city_list">
+        <tr>
+            <td>序号</td>
+            <td>捐书人</td>
+            <td>书名</td>
+            <td>经办人</td>
+            <td>状态</td>
+            <td>捐书时间</td>
+            <td>操作</td>
+        </tr>
+        {volist name="list" id = "x"}
+        <tr>
+            <td>{$i+$perPage*($currentPage-1)}</td>
+            <td>{$x.user_name}</td>
+            <td>{$x.book_name}</td>
+            <td>{$x.operator}</td>
+            <td>
+                {switch name="x.status"}
+                {case value="0"}<span style="color: #ff5500">未审核</span>{/case}
+                {case value="1"}<span style="color: #4FAB1C">审核通过</span>{/case}
+                {default /}
+                {/switch}
+            </td>
+            <td>{$x.donate_time|date="Y-m-d H:i",###}</td>
+            <td>
+                {switch name="x.status"}
+                {case value="0"}<a class="btn btn_primary" href="/admin/book_donate/edit/id/{$x.id}">完善审核</a>{/case}
+                {case value="1"}<button class="btn btn_primary">已经入库</button>{/case}
+                {default /}错误
+                {/switch}
+
+                <a class="btn" href="/admin/book_donate/delete/id/{$x.id}">删除</a>
+            </td>
+        </tr>
+        {/volist}
+    </table>
+    <div class="page">{$list->render()}</div>
+
+</div>
