@@ -10,7 +10,7 @@ bxsAPI.un = "13552997366";
 bxsAPI.token = {
 	field:"access-token",
 	value:"ZBy0YkZOIS6K9RFQINlPcdmnGtV_UOwR-1Wuufem"
-}
+};
 bxsAPI.page={
 	curPage:{field:"page",default:1},//当前页
 	eachPageSize:{field:"per-page",default:20}//每页显示条数

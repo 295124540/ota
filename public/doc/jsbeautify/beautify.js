@@ -175,7 +175,7 @@
 
     function Beautifier(js_source_text, options) {
         "use strict";
-        var output
+        var output;
         var tokens = [], token_pos;
         var Tokenizer;
         var current_token;
@@ -684,8 +684,8 @@
 
         function handle_start_block() {
             // Check if this is should be treated as a ObjectLiteral
-            var next_token = get_token(1)
-            var second_token = get_token(2)
+            var next_token = get_token(1);
+            var second_token = get_token(2);
             if (second_token && (
                     (second_token.text === ':' && in_array(next_token.type, ['TK_STRING', 'TK_WORD', 'TK_RESERVED']))
                     || (in_array(next_token.text, ['get', 'set']) && in_array(second_token.type, ['TK_WORD', 'TK_RESERVED']))
@@ -1228,17 +1228,17 @@
         var _empty = true;
 
         this.set_indent = function(level) {
-            _character_count = parent.baseIndentLength + level * parent.indent_length
+            _character_count = parent.baseIndentLength + level * parent.indent_length;
             _indent_count = level;
-        }
+        };
 
         this.get_character_count = function() {
             return _character_count;
-        }
+        };
 
         this.is_empty = function() {
             return _empty;
-        }
+        };
 
         this.last = function() {
             if (!this._empty) {
@@ -1246,20 +1246,20 @@
             } else {
               return null;
             }
-        }
+        };
 
         this.push = function(input) {
             _items.push(input);
             _character_count += input.length;
             _empty = false;
-        }
+        };
 
         this.remove_indent = function() {
             if (_indent_count > 0) {
                 _indent_count -= 1;
                 _character_count -= parent.indent_length
             }
-        }
+        };
 
         this.trim = function() {
             while (this.last() === ' ') {
@@ -1267,7 +1267,7 @@
                 _character_count -= 1;
             }
             _empty = _items.length === 0;
-        }
+        };
 
         this.toString = function() {
             var result = '';
@@ -1295,7 +1295,7 @@
 
         this.get_line_number = function() {
             return lines.length;
-        }
+        };
 
         // Using object instead of string to allow for later expansion of info about each line
         this.add_new_line = function(force_newline) {
@@ -1310,7 +1310,7 @@
             }
 
             return false;
-        }
+        };
 
         // initialize
         this.add_new_line(true);
@@ -1318,7 +1318,7 @@
         this.get_code = function() {
             var sweet_code = lines.join('\n').replace(/[\r\n\t ]+$/, '');
             return sweet_code;
-        }
+        };
 
         this.set_indent = function(level) {
             // Never indent your first output indent at the start of the file
@@ -1332,19 +1332,19 @@
             }
             this.current_line.set_indent(0);
             return false;
-        }
+        };
 
         this.add_token = function(printable_token) {
             this.add_space_before_token();
             this.current_line.push(printable_token);
-        }
+        };
 
         this.add_space_before_token = function() {
             if (this.space_before_token && !this.just_added_newline()) {
                 this.current_line.push(' ');
             }
             this.space_before_token = false;
-        }
+        };
 
         this.remove_redundant_indentation = function (frame) {
             // This implementation is effective but has some issues:
@@ -1367,7 +1367,7 @@
                 lines[index].remove_indent();
                 index++;
             }
-        }
+        };
 
         this.trim = function(eat_newlines) {
             eat_newlines = (eat_newlines === undefined) ? false : eat_newlines;
@@ -1377,14 +1377,14 @@
             while (eat_newlines && lines.length > 1 &&
                 this.current_line.is_empty()) {
                 lines.pop();
-                this.current_line = lines[lines.length - 1]
+                this.current_line = lines[lines.length - 1];
                 this.current_line.trim();
             }
-        }
+        };
 
         this.just_added_newline = function() {
             return this.current_line.is_empty();
-        }
+        };
 
         this.just_added_blankline = function() {
             if (this.just_added_newline()) {
@@ -1408,7 +1408,7 @@
         this.wanted_newline = newlines > 0;
         this.whitespace_before = whitespace_before || '';
         this.parent = null;
-    }
+    };
 
     function tokenizer(input, opts, indent_string) {
 
@@ -1427,9 +1427,9 @@
 
         this.tokenize = function() {
             // cache the source's length.
-            input_length = input.length
+            input_length = input.length;
             parser_pos = 0;
-            in_html_comment = false
+            in_html_comment = false;
             tokens = [];
 
             var next, last;
@@ -1471,7 +1471,7 @@
             }
 
             return tokens;
-        }
+        };
 
         function tokenize_next() {
             var i, resulting_string;
@@ -1888,7 +1888,7 @@
                         } else {
                             out += '\\u' + s_hex;
                         }
-                        continue;
+
                     } else if (escaped === 0x22 || escaped === 0x27 || escaped === 0x5c) {
                         // single-quote, apostrophe, backslash - escape these
                         out += '\\' + String.fromCharCode(escaped);

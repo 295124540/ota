@@ -8,6 +8,7 @@ use common\model\BookHouse as BookHouseModel;
 use common\model\BookModel as BookModelModel;
 use common\model\Category as CategoryModel;
 use common\model\Users as UsersModel;
+use common\model\Dynamic as DynamicModel;
 
 class BookDonate extends AdminController
 {
@@ -96,15 +97,31 @@ class BookDonate extends AdminController
 
                     $donateModel->book_id = $model->id;
                     $donateModel->status = 1;
-                    $admin = json_decode($this->getLoginAdmin(),true);
-                    $donateModel->operator = $admin['name'];
+                    $donateModel->operator = $this->admin->name;
                     $rt = $donateModel->save();
                     if($rt){
+                        // 1用户获得积分
                         $userModel = UsersModel::get($donateModel->user_id);
                         if($userModel){
                             $userModel->point = $userModel->point + 50;// 获得1积分
                             $userModel->save();
                         }
+
+                        // 2生成动态记录
+                        // 0未知 1心情  2民宿评 3书评 4捐书 5租书
+                        $m = DynamicModel::get(['source_id'=>$donateModel->id,'type'=>4]);
+                        if(!$m){
+                            $param = [
+                                'user_id'=> $userModel->yunsu_id,
+                                'user_name'=>  $userModel->nickname,
+                                'user_head_img'=> $userModel->head_img_url,
+                                'source_id'=>$donateModel->id,
+                                'type'=>4,
+                                'action'=>"租了一本书：《".$bmModel->name."》",
+                            ];
+                            DynamicModel::create($param);
+                        }
+
                         $this->success("审核通过成功！",'index');
                     }else{
                         $this->error("审核失败成功".$donateModel->getError());

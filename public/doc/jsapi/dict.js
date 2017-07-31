@@ -14,7 +14,7 @@ bxsAPI.server = bxsAPI.local?"http://saas.icloudinn.com":"http://saas.com";
 bxsAPI.fieldDict={
     dd:"产品设计",
     detail:"汪君相、梁绣"
-}
+};
 
 /**
  * 数据字典
@@ -48,7 +48,7 @@ bxsAPI.execFieldDict = function(data){
         }
     }
 
-}
+};
 
 new Request({
     method: 'get',

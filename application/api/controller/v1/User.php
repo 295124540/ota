@@ -2,11 +2,11 @@
 namespace app\api\controller\v1;
 
 use common\controller\ApiBaseController;
+use common\model\HotelOrder;
 use think\Db;
 
 use common\model\Users as UsersModel;
 use common\model\Concern;
-use common\model\Order;
 use common\model\BookDonate;
 use common\model\BookRent;
 
@@ -74,7 +74,7 @@ class User extends ApiBaseController
             foreach ($data['data'] as $k=>$m){
                 $data['data'][$k]['user']['rent_num'] = BookRent::where(['user_id'=>$m[$f]])->count();
                 $data['data'][$k]['user']['donate_num'] = BookDonate::where(['user_id'=>$m[$f]])->count();
-                $data['data'][$k]['user']['check_in_hotel_num'] = Order::where(['user_id'=>$m[$f]])->count();
+                $data['data'][$k]['user']['check_in_hotel_num'] = HotelOrder::where(['user_id'=>$m[$f]])->count();
             }
         }
         success($data);
@@ -103,7 +103,7 @@ class User extends ApiBaseController
      */
     public function isMember(){
 
-        $order = Order::get(['user_id'=>$this->userId,'status'=>1]);
+        $order = HotelOrder::get(['user_id'=>$this->userId,'status'=>1]);
         $donate = BookDonate::get(['user_id'=>$this->userId,'status'=>1]);
         if($order||$donate){
             api(100,"是会员",true);

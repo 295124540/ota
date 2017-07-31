@@ -33,6 +33,7 @@ return [
         'api/collect'=>['api/'.$v.'.collect',['only'=>['index','read','save','delete']]],
         'api/comment'=>['api/'.$v.'.comment',['only'=>['index','read','save','delete']]],
         'api/order'=>['api/'.$v.'.order',['only'=>['index','read','save','update']]],
+        'api/hotel_order'=>['api/'.$v.'.hotel_order',['only'=>['index','read','save','update']]],
         'api/room_price_calendar'=>['api/'.$v.'.room_price_calendar',['only'=>['index','read','save','update']]],
         'api/cash_pledge'=>['api/'.$v.'.cash_pledge',['only'=>['index','read','save','update']]],
         'api/dynamic'=>['api/'.$v.'.dynamic',['only'=>['index','read','create','save','edit','update','delete']]],
@@ -46,7 +47,7 @@ return [
     'api/user/:id'       => ['api/'.$v.'.user/read',['method' => 'get'], ['id' => '\d+']],
     'api/user/concern'   => ['api/'.$v.'.user/concern',['method' => 'get']],
     'api/user/friend'    => ['api/'.$v.'.user/friend',['method' => 'get']],
-    'api/order/cancel/:id'   => ['api/'.$v.'.order/cancel',['method' => 'get'], ['id' => '\d+']],
-    'api/order/checkOut/:id'   => ['api/'.$v.'.order/checkOut',['method' => 'get'], ['id' => '\d+']],
+    'api/hotel_order/cancel/:id'   => ['api/'.$v.'.hotel_order/cancel',['method' => 'get'], ['id' => '\d+']],
+    'api/hotel_order/checkOut/:id'   => ['api/'.$v.'.hotel_order/checkOut',['method' => 'get'], ['id' => '\d+']],
 
 ];

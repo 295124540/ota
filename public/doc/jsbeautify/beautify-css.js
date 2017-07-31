@@ -120,7 +120,7 @@
         function eatWhitespace() {
             var result = '';
             while (whiteRe.test(peek())) {
-                next()
+                next();
                 result += ch;
             }
             return result;

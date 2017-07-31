@@ -15,7 +15,7 @@ bxsAPI.navPanelExec = function(){
 				bxsAPI.navShow = 0;
 			}
 			bxsAPI.reSizeNavPanel();
-		}
+		};
 		var apicatebox = new Element("div",{"id":"apicatebox","class":"apicatebox"}).inject(navpanelbox);
 		for(var c=0;c<bxsAPI.apicates.length;c++){
 			var cate = bxsAPI.apicates[c];
@@ -42,7 +42,7 @@ bxsAPI.navPanelExec = function(){
 			}
 		});
 	}
-}
+};
 bxsAPI.reSizeNavPanel = function(obj){
 	if(!obj) obj = $("navPanel");
 	if(!obj) return;
@@ -51,7 +51,7 @@ bxsAPI.reSizeNavPanel = function(obj){
 	}else{
 		obj.setStyle("height","auto");
 	}
-}
+};
 bxsAPI.exec = function(){
 	var apiboxwrapborder = $("apiboxwrapborder");
 	for(var c=0;c<bxsAPI.apicates.length;c++){
@@ -63,7 +63,7 @@ bxsAPI.exec = function(){
 			var mobj = apisData[i];
 			mobj.idno = c+"_"+i;
 			var apibox = new Element("div",{"class":"apibox"}).inject(apiboxwrapborder);
-			var anchor  = new Element("a",{"id":mobj.idno,"name":mobj.idno}).inject(apibox)
+			var anchor  = new Element("a",{"id":mobj.idno,"name":mobj.idno}).inject(apibox);
 			
 			var apih3 = new Element("div",{"class":"apih3"}).inject(apibox).set("html",bxsAPI.listno(c+1,i+1)+mobj.name);
 			var apitbl = new Element("table",{"class":"apitbl","border":"0","width":"100%","cellpadding":"0","cellspacing":"0"}).inject(apibox);
@@ -90,7 +90,7 @@ bxsAPI.exec = function(){
 				var tdmc = new Element("td",{"class":"tdc","colspan":2}).inject(trm).set("html",auth);
 
 
-				var urlParams=new Array();
+				var urlParams=[];
 				if(mobj.auth){
 					var authInfo={field:bxsAPI.token.field,isrequire:true,desc:"登录令牌",sample:bxsAPI.token.value};
 					urlParams.push(authInfo);
@@ -98,10 +98,10 @@ bxsAPI.exec = function(){
 
 				if(mobj.ispage){
 					var cp=bxsAPI.page.curPage;
-					var curPage={field:cp.field,isrequire:false,desc:"当前页，从"+cp.default+"开始,不填默认显示第1页。",sample:cp.default}
+					var curPage={field:cp.field,isrequire:false,desc:"当前页，从"+cp.default+"开始,不填默认显示第1页。",sample:cp.default};
 					urlParams.push(curPage);
 					var ep=bxsAPI.page.eachPageSize;
-					var pageSize={field:ep.field,isrequire:false,desc:"每页显示条数，不填默认显示"+ep.default+"条。",sample:ep.default}
+					var pageSize={field:ep.field,isrequire:false,desc:"每页显示条数，不填默认显示"+ep.default+"条。",sample:ep.default};
 					urlParams.push(pageSize);
 				}
 
@@ -261,7 +261,7 @@ bxsAPI.exec = function(){
 	}
 	
 	bxsAPI.layout.init();
-}
+};
 
 //接口测试方法
 bxsAPI.fjsOpts = {};
@@ -317,7 +317,7 @@ bxsAPI.testApi = function(idno,method,flag,subno){
 	}else{
 		alert("参数为空，检查一下");
 	}
-}
+};
 
 
 bxsAPI.requestTiming = function(idno){
@@ -328,12 +328,12 @@ bxsAPI.requestTiming = function(idno){
 			reqtimingspan.innerHTML = (bxsAPI.ending-bxsAPI.starting)+"ms";
 		}
 	}
-}
+};
 
 bxsAPI.hideApiBox = function(idno){
 	var rebox = $("rebox"+idno);
 	if(rebox) rebox.style.display = "none";
-}
+};
 
 
 /**
@@ -356,7 +356,7 @@ bxsAPI.execUpdates = function(){
 			 new Element("div",{"class":"tdcondiv"}).inject(tdmcon).set("html",upobj.con[k]);
 		}
 	}
-}
+};
 /**
  * 服务器信息
  */
@@ -381,7 +381,7 @@ bxsAPI.execServer = function(){
 		new Element("td",{"class":"tdc"}).inject(trm).set("html",bxsAPI.readme);
 	}
 	
-}
+};
 
 /**
  * 返回数据说明
@@ -415,7 +415,7 @@ bxsAPI.execBack = function(){
 		trreturnpn.set("rowspan",pcount);
 	}
 
-}
+};
 
 /**
  * 返回代码
@@ -449,7 +449,7 @@ bxsAPI.execReturnCode = function() {
 			trpn.set("rowspan", n);
 		}
 	}
-}
+};
 /**
  * 系统信息
  */
@@ -500,7 +500,7 @@ bxsAPI.execSystemInfo = function(){
 		trreturnpn.set("rowspan",key);
 	}
 
-}
+};
 
 /**
  * 开发进度
@@ -542,7 +542,7 @@ bxsAPI.execProgress = function(){
 
 	}
 
-}
+};
 /**
  * 第三方信息
  */
@@ -567,13 +567,13 @@ bxsAPI.execThirdInfo = function(){
 			}
 		}
 	}
-}
+};
 bxsAPI.listno = function(L1,L2,L3){
 	var s = "<span style='margin-right:5px;'>"+L1;
 	if(L2) s += "."+L2;
 	if(L3) s += "."+L3;
 	return s+"</span>";
-}
+};
 bxsAPI.layout = {
 	init:function(){
 		var layoutbox = $("layoutbox");
@@ -603,8 +603,8 @@ bxsAPI.layout = {
 			}
 		}
 	}
-}
+};
 bxsAPI.ver = function(){
 	document.write("<span class='spanversion'>_"+bxsAPI.version+"</span>")
-}
+};
 document.write("<script type=\"text/javascript\" src=\"jsbeautify/beautify.js\"></script>");

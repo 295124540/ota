@@ -11,8 +11,11 @@ namespace app\api\controller\v1;
 use common\controller\ActiveController;
 use common\model\Comment as CommentModel;
 use common\model\CommentReply as CommentReplyModel;
-use common\model\Order as OrderModel;
+use common\model\HotelOrder as HotelOrderModel;
 use common\model\Users as UsersModel;
+use common\model\House as HouseModel;
+use common\model\Book as BookModel;
+use common\model\Dynamic as DynamicModel;
 
 class Comment extends ActiveController{
 
@@ -28,8 +31,9 @@ class Comment extends ActiveController{
         $params['type']= $type;
 
         if($params['type']==1){
+            if(!HouseModel::get($sourceId))error("该民宿不存在");
             $orderId = paramFromPost('order_id',true);
-            $order = OrderModel::get(['id'=>$orderId,'user_id'=>$this->userId]);
+            $order = HotelOrderModel::get(['hotel_order_id'=>$orderId,'user_id'=>$this->userId]);
             if($order==null)error("你没有该订单哦！");
             if($order->status == 4)error("你已经评价过了！");
             if($order->status != 3)error("不满足评论条件哦！");
@@ -39,10 +43,12 @@ class Comment extends ActiveController{
         }
 
         if($params['type']==2){
+            if(!BookModel::get($sourceId))error("该书不存在");
             $action = "写了一个书评！";
         }
 
         if($params['type']==3){
+            if(!DynamicModel::get($sourceId))error("该动态不存在");
             $action = "评论了主人的心情！";
         }
 
@@ -64,8 +70,9 @@ class Comment extends ActiveController{
 
         $m = CommentModel::create($params);
         if($m){
-
-            $this->saveDynamic($sourceId,$type,$action);
+            if($params['type']!=3){
+                $this->saveDynamic($sourceId,$type,$action);
+            }
 
             if($params['type']==2){
                 $userModel = UsersModel::get($m->user_id);

@@ -7,7 +7,7 @@ use common\model\BookDonate as BookDonateModel;
 class BookDonate extends ActiveController
 {
 
-    public $modelClass = 'common\model\BookDonate';
+    protected $modelClass = 'common\model\BookDonate';
     protected $loginAuth = ['except'=>'index'];
     protected $order = 'donate_time DESC';
 
@@ -54,15 +54,17 @@ class BookDonate extends ActiveController
             $this->validate($book,$rule);
             $params['list'][$k]['user_phone']=$params['phone'];
             $params['list'][$k]['user_id']=$this->userId;
-            $params['list'][$k]['user_name']=$this->user['nickname'];
+            $user = $this->user;
+            if(isset($user['nickname'])){
+                $params['list'][$k]['user_name']=$user['nickname'];
+            }else{
+                $params['list'][$k]['user_name']='无昵称';
+            }
             $params['list'][$k]['donate_time']=time();
         }
         $model = new BookDonateModel();
         $rt = $model->saveAll($params['list']);
         if($rt){
-            foreach ($rt as $item){
-                $this->saveDynamic($item->id,4,"捐了一本书：《".$item->book_name."》");
-            }
             success($rt);
         }else{
             error($model->getError());

@@ -3049,8 +3049,7 @@ typeof(exports) != 'undefined' ? exports.SyntaxHighlighter = SyntaxHighlighter :
 	// CommonJS
 	typeof(exports) != 'undefined' ? exports.Brush = Brush : null;
 })();
-;(function()
-{
+(function () {
 	// CommonJS
 	SyntaxHighlighter = SyntaxHighlighter || (typeof require !== 'undefined'? require('shCore').SyntaxHighlighter : null);
 
@@ -3075,9 +3074,8 @@ typeof(exports) != 'undefined' ? exports.SyntaxHighlighter = SyntaxHighlighter :
 			];
 	
 		this.forHtmlScript(r.scriptScriptTags);
-	};
-
-	Brush.prototype	= new SyntaxHighlighter.Highlighter();
+    }
+    Brush.prototype	= new SyntaxHighlighter.Highlighter();
 	Brush.aliases	= ['js', 'jscript', 'javascript'];
 
 	SyntaxHighlighter.brushes.JScript = Brush;
@@ -3085,8 +3083,7 @@ typeof(exports) != 'undefined' ? exports.SyntaxHighlighter = SyntaxHighlighter :
 	// CommonJS
 	typeof(exports) != 'undefined' ? exports.Brush = Brush : null;
 })();
-;(function()
-{
+(function () {
 	// CommonJS
 	SyntaxHighlighter = SyntaxHighlighter || (typeof require !== 'undefined'? require('shCore').SyntaxHighlighter : null);
 
@@ -3162,8 +3159,7 @@ typeof(exports) != 'undefined' ? exports.SyntaxHighlighter = SyntaxHighlighter :
 	// CommonJS
 	typeof(exports) != 'undefined' ? exports.Brush = Brush : null;
 })();
-;(function()
-{
+(function () {
 	// CommonJS
 	SyntaxHighlighter = SyntaxHighlighter || (typeof require !== 'undefined'? require('shCore').SyntaxHighlighter : null);
 
@@ -3224,9 +3220,8 @@ typeof(exports) != 'undefined' ? exports.SyntaxHighlighter = SyntaxHighlighter :
 			];
 
 		this.forHtmlScript(SyntaxHighlighter.regexLib.phpScriptTags);
-	};
-
-	Brush.prototype	= new SyntaxHighlighter.Highlighter();
+    }
+    Brush.prototype	= new SyntaxHighlighter.Highlighter();
 	Brush.aliases	= ['php'];
 
 	SyntaxHighlighter.brushes.Php = Brush;
@@ -3234,16 +3229,14 @@ typeof(exports) != 'undefined' ? exports.SyntaxHighlighter = SyntaxHighlighter :
 	// CommonJS
 	typeof(exports) != 'undefined' ? exports.Brush = Brush : null;
 })();
-;(function()
-{
+(function () {
 	// CommonJS
 	SyntaxHighlighter = SyntaxHighlighter || (typeof require !== 'undefined'? require('shCore').SyntaxHighlighter : null);
 
 	function Brush()
 	{
-	};
-
-	Brush.prototype	= new SyntaxHighlighter.Highlighter();
+    }
+    Brush.prototype	= new SyntaxHighlighter.Highlighter();
 	Brush.aliases	= ['text', 'plain'];
 
 	SyntaxHighlighter.brushes.Plain = Brush;
@@ -3251,8 +3244,7 @@ typeof(exports) != 'undefined' ? exports.SyntaxHighlighter = SyntaxHighlighter :
 	// CommonJS
 	typeof(exports) != 'undefined' ? exports.Brush = Brush : null;
 })();
-;(function()
-{
+(function () {
 	// CommonJS
 	SyntaxHighlighter = SyntaxHighlighter || (typeof require !== 'undefined'? require('shCore').SyntaxHighlighter : null);
 
@@ -3300,9 +3292,8 @@ typeof(exports) != 'undefined' ? exports.SyntaxHighlighter = SyntaxHighlighter :
 			{ regex: new RegExp('\\[[A-Z_\\[][A-Z0-9_. `,\\[\\]]*\\]', 'gi'),								css: 'constants' },						// .Net [Type]s
 			{ regex: new RegExp('\\s+-(?!'+this.getKeywords(operators)+')[a-zA-Z_][a-zA-Z0-9_]*', 'gmi'),	css: 'color1' },						// parameters	  
 		];
-	};
-
-	Brush.prototype	= new SyntaxHighlighter.Highlighter();
+    }
+    Brush.prototype	= new SyntaxHighlighter.Highlighter();
 	Brush.aliases	= ['powershell', 'ps', 'posh'];
 
 	SyntaxHighlighter.brushes.PowerShell = Brush;
@@ -3310,8 +3301,7 @@ typeof(exports) != 'undefined' ? exports.SyntaxHighlighter = SyntaxHighlighter :
 	// CommonJS
 	typeof(exports) != 'undefined' ? exports.Brush = Brush : null;
 })();
-;(function()
-{
+(function () {
 	// CommonJS
 	SyntaxHighlighter = SyntaxHighlighter || (typeof require !== 'undefined'? require('shCore').SyntaxHighlighter : null);
 
@@ -3348,9 +3338,8 @@ typeof(exports) != 'undefined' ? exports.SyntaxHighlighter = SyntaxHighlighter :
 				];
 			
 		this.forHtmlScript(SyntaxHighlighter.regexLib.aspScriptTags);
-	};
-
-	Brush.prototype	= new SyntaxHighlighter.Highlighter();
+    }
+    Brush.prototype	= new SyntaxHighlighter.Highlighter();
 	Brush.aliases	= ['py', 'python'];
 
 	SyntaxHighlighter.brushes.Python = Brush;
@@ -3358,8 +3347,7 @@ typeof(exports) != 'undefined' ? exports.SyntaxHighlighter = SyntaxHighlighter :
 	// CommonJS
 	typeof(exports) != 'undefined' ? exports.Brush = Brush : null;
 })();
-;(function()
-{
+(function () {
 	// CommonJS
 	SyntaxHighlighter = SyntaxHighlighter || (typeof require !== 'undefined'? require('shCore').SyntaxHighlighter : null);
 
@@ -3387,9 +3375,8 @@ typeof(exports) != 'undefined' ? exports.SyntaxHighlighter = SyntaxHighlighter :
 			];
 
 		this.forHtmlScript(SyntaxHighlighter.regexLib.aspScriptTags);
-	};
-
-	Brush.prototype	= new SyntaxHighlighter.Highlighter();
+    }
+    Brush.prototype	= new SyntaxHighlighter.Highlighter();
 	Brush.aliases	= ['ruby', 'rails', 'ror', 'rb'];
 
 	SyntaxHighlighter.brushes.Ruby = Brush;
@@ -3397,8 +3384,7 @@ typeof(exports) != 'undefined' ? exports.SyntaxHighlighter = SyntaxHighlighter :
 	// CommonJS
 	typeof(exports) != 'undefined' ? exports.Brush = Brush : null;
 })();
-;(function()
-{
+(function () {
 	// CommonJS
 	SyntaxHighlighter = SyntaxHighlighter || (typeof require !== 'undefined'? require('shCore').SyntaxHighlighter : null);
 
@@ -3407,14 +3393,12 @@ typeof(exports) != 'undefined' ? exports.SyntaxHighlighter = SyntaxHighlighter :
 		function getKeywordsCSS(str)
 		{
 			return '\\b([a-z_]|)' + str.replace(/ /g, '(?=:)\\b|\\b([a-z_\\*]|\\*|)') + '(?=:)\\b';
-		};
-	
-		function getValuesCSS(str)
+        }
+        function getValuesCSS(str)
 		{
 			return '\\b' + str.replace(/ /g, '(?!-)(?!:)\\b|\\b()') + '\:\\b';
-		};
-
-		var keywords =	'ascent azimuth background-attachment background-color background-image background-position ' +
+        }
+        var keywords =	'ascent azimuth background-attachment background-color background-image background-position ' +
 						'background-repeat background baseline bbox border-collapse border-color border-spacing border-style border-top ' +
 						'border-right border-bottom border-left border-top-color border-right-color border-bottom-color border-left-color ' +
 						'border-top-style border-right-style border-bottom-style border-left-style border-top-width border-right-width ' +
@@ -3465,9 +3449,8 @@ typeof(exports) != 'undefined' ? exports.SyntaxHighlighter = SyntaxHighlighter :
 			{ regex: new RegExp(getValuesCSS(values), 'g'),				css: 'value' },			// values
 			{ regex: new RegExp(this.getKeywords(fonts), 'g'),			css: 'color1' }			// fonts
 			];
-	};
-
-	Brush.prototype	= new SyntaxHighlighter.Highlighter();
+    }
+    Brush.prototype	= new SyntaxHighlighter.Highlighter();
 	Brush.aliases	= ['sass', 'scss'];
 
 	SyntaxHighlighter.brushes.Sass = Brush;
@@ -3475,8 +3458,7 @@ typeof(exports) != 'undefined' ? exports.SyntaxHighlighter = SyntaxHighlighter :
 	// CommonJS
 	typeof(exports) != 'undefined' ? exports.Brush = Brush : null;
 })();
-;(function()
-{
+(function () {
 	// CommonJS
 	SyntaxHighlighter = SyntaxHighlighter || (typeof require !== 'undefined'? require('shCore').SyntaxHighlighter : null);
 
@@ -3510,8 +3492,7 @@ typeof(exports) != 'undefined' ? exports.SyntaxHighlighter = SyntaxHighlighter :
 	// CommonJS
 	typeof(exports) != 'undefined' ? exports.Brush = Brush : null;
 })();
-;(function()
-{
+(function () {
 	// CommonJS
 	SyntaxHighlighter = SyntaxHighlighter || (typeof require !== 'undefined'? require('shCore').SyntaxHighlighter : null);
 
@@ -3549,9 +3530,8 @@ typeof(exports) != 'undefined' ? exports.SyntaxHighlighter = SyntaxHighlighter :
 			{ regex: new RegExp(this.getKeywords(operators), 'gmi'),			css: 'color1' },			// operators and such
 			{ regex: new RegExp(this.getKeywords(keywords), 'gmi'),				css: 'keyword' }			// keyword
 			];
-	};
-
-	Brush.prototype	= new SyntaxHighlighter.Highlighter();
+    }
+    Brush.prototype	= new SyntaxHighlighter.Highlighter();
 	Brush.aliases	= ['sql'];
 
 	SyntaxHighlighter.brushes.Sql = Brush;
@@ -3560,8 +3540,7 @@ typeof(exports) != 'undefined' ? exports.SyntaxHighlighter = SyntaxHighlighter :
 	typeof(exports) != 'undefined' ? exports.Brush = Brush : null;
 })();
 
-;(function()
-{
+(function () {
 	// CommonJS
 	SyntaxHighlighter = SyntaxHighlighter || (typeof require !== 'undefined'? require('shCore').SyntaxHighlighter : null);
 
@@ -3590,9 +3569,8 @@ typeof(exports) != 'undefined' ? exports.SyntaxHighlighter = SyntaxHighlighter :
 			];
 
 		this.forHtmlScript(SyntaxHighlighter.regexLib.aspScriptTags);
-	};
-
-	Brush.prototype	= new SyntaxHighlighter.Highlighter();
+    }
+    Brush.prototype	= new SyntaxHighlighter.Highlighter();
 	Brush.aliases	= ['vb', 'vbnet'];
 
 	SyntaxHighlighter.brushes.Vb = Brush;
@@ -3600,8 +3578,7 @@ typeof(exports) != 'undefined' ? exports.SyntaxHighlighter = SyntaxHighlighter :
 	// CommonJS
 	typeof(exports) != 'undefined' ? exports.Brush = Brush : null;
 })();
-;(function()
-{
+(function () {
 	// CommonJS
 	SyntaxHighlighter = SyntaxHighlighter || (typeof require !== 'undefined'? require('shCore').SyntaxHighlighter : null);
 
@@ -3643,9 +3620,8 @@ typeof(exports) != 'undefined' ? exports.SyntaxHighlighter = SyntaxHighlighter :
 			{ regex: SyntaxHighlighter.regexLib.xmlComments,												css: 'comments' },	// <!-- ... -->
 			{ regex: new XRegExp('(&lt;|<)[\\s\\/\\?]*(\\w+)(?<attributes>.*?)[\\s\\/\\?]*(&gt;|>)', 'sg'), func: process }
 		];
-	};
-
-	Brush.prototype	= new SyntaxHighlighter.Highlighter();
+    }
+    Brush.prototype	= new SyntaxHighlighter.Highlighter();
 	Brush.aliases	= ['xml', 'xhtml', 'xslt', 'html'];
 
 	SyntaxHighlighter.brushes.Xml = Brush;

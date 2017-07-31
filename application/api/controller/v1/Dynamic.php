@@ -10,10 +10,7 @@ class Dynamic extends ActiveController
 
     protected $modelClass = 'common\model\Dynamic';
     protected $order = "create_time desc";
-    protected $with = 'user';
-    protected $beforeActionList = [
-        'loginAuth' =>  ['except'=>'index,read,mood'],
-    ];
+    protected $loginAuth = ['except'=>'index,read,mood'];
 
     protected function prepareDataProvider()
     {
@@ -23,14 +20,18 @@ class Dynamic extends ActiveController
 
         foreach ($list as $m){
 
-            if($m->type==1&&$m->hotel){//民宿评论动态
-                foreach ($m->hotel->comment as $rp){
-                    $rp->reply;//评论回复
+            if($m->type==1){//民宿评论动态
+                if($m->hotel){
+                    foreach ($m->hotel->comment as $rp){
+                        $rp->reply;//评论回复
+                    }
                 }
             }
-            if($m->type==2&&$m->book){
-                foreach($m->book->comment as $rp){//书评动态
-                    $rp->reply;//评论回复
+            if($m->type==2){
+                if($m->book){
+                    foreach($m->book->comment as $rp){//书评动态
+                        $rp->reply;//评论回复
+                    }
                 }
             }
             if ($m->type==3){

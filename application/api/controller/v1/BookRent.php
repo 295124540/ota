@@ -8,7 +8,7 @@ use common\model\Users as UsersModel;
 class BookRent extends ActiveController
 {
 
-    public $modelClass = 'common\model\BookRent';
+    protected $modelClass = 'common\model\BookRent';
     protected $beforeActionList = [
         'setCondition' =>  ['only'=>'index'],
     ];
@@ -17,6 +17,7 @@ class BookRent extends ActiveController
         $userId = paramFromGet('user_id');
         if($userId){
             $this->condition = ['user_id'=>$userId];
+            $this->condition = ['status'=>1];
         }
     }
 
@@ -50,20 +51,13 @@ class BookRent extends ActiveController
             'book_id'=>$bookId,
             'user_id'=>$this->userId,
             'user_name'=>$this->user['nickname'],
+            'guaranty_money'=>$m->price,
             'rent_time'=>time()
         ];
 
         $modelClass = $this->modelClass;
         $m2 = $modelClass::create($param);
         if($m2){
-            $this->saveDynamic($m2->id,5,"租了一本书：《".$m->model->name."》");
-            $userModel = UsersModel::get($m->user_id);
-            if($userModel){
-                $userModel->point = $userModel-> point + 30;// 租书获得1积分
-                $userModel->save();
-            }
-            $m->status = 2;
-            $m->save();
             success($m2);
         }else{
             error($m2->getError());

@@ -11,12 +11,12 @@ bxsAPI.group=[
     {groupName:"小程序开发",detail:"汪君相、李转清"},
 	{groupName:"IOS开发",detail:"唐晓斌"},
 	{groupName:"安卓开发",detail:"李俊宇"},
-]
+];
 bxsAPI.mainFunctions=[
 	"民宿预订",
 	"书籍捐、借、著",
 	"社区",
-]
+];
 
 bxsAPI.progress.push({
 	week : "一",
@@ -290,7 +290,7 @@ bxsAPI.progress.push({
 
 bxsAPI.progress.push({
 	week : "九",
-	date:"7.10-7.5",
+	date:"7.10-7.15",
 	model: [
 		{
 			modelName:"优化",
@@ -324,6 +324,42 @@ bxsAPI.progress.push({
 				"完善了登录角色验证"
 			]
 		},
+	]
+});
+
+
+bxsAPI.progress.push({
+	week : "十",
+	date:"7.17-7.21",
+	model: [
+		{
+			modelName:"优化",
+			functions:[
+				"优化了token校验规则",
+				"修复了评论书宿，不能生成动态问题",
+				"优化了圈子动态",
+				"优化了民宿订单提示",
+				"废弃了民宿下单接口，新添加了民宿下单接口",
+				"重构了民宿订单",
+				"调整了微信支付回调通知",
+				"调整了用户系统微信登录，unionId作为身份关键字段，弃用openId"
+			]
+		}
+	]
+});
+bxsAPI.progress.push({
+	week : "十一",
+	date:"7.17-7.21",
+	model: [
+		{
+			modelName:"优化",
+			functions:[
+				"更换了小程序账号",
+				"重构了支付成功回调通知",
+				"优化了圈子动态",
+				"租书定金支付流程更换",
+			]
+		}
 	]
 });
 

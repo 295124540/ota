@@ -158,7 +158,7 @@
                     }
                 }
                 return true;
-            }
+            };
 
             this.traverse_whitespace = function() {
                 var input_char = '';

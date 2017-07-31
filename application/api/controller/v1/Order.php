@@ -180,7 +180,13 @@ class Order extends ActiveController
      */
     public function cancel($id){
         $order = $this->findModel($id);
-        if($order->status!=0)error("你的订单不满足取消条件！");
+        if($order->status!=0){
+            if($order->status==-1){
+                error("该订单状态为：".$order->status.",已经取消,请勿重复操作！");
+            }else{
+                error("该订单状态为：".$order->status.",不满足取消条件！");
+            }
+        }
         $order->status = -1;
         if($order->save()){
             api(100,"取消成功！");
