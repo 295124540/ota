@@ -35,9 +35,9 @@ class Comment extends ActiveController{
             $orderId = paramFromPost('order_id',true);
             $order = HotelOrderModel::get(['hotel_order_id'=>$orderId,'user_id'=>$this->userId]);
             if($order==null)error("你没有该订单哦！");
-            if($order->status == 4)error("你已经评价过了！");
-            if($order->status != 3)error("不满足评论条件哦！");
-            $order->status = 4;//改变订单状态,已评价、交易完成
+            if($order->status == 5)error("你已经评价过了！");
+            if($order->status != 4)error("不满足评论条件哦！");
+            $order->status = 5;//改变订单状态,已评价、交易完成
             $order->save();
             $action = "评论了民宿！";
         }

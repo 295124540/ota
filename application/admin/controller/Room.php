@@ -66,10 +66,9 @@ class Room extends AdminController
             $info = $file->move(ROOT_PATH . 'public' . DS . 'uploads');
             $filePath =$info->getSaveName();
             if($info){
-                $url = "/uploads/".str_replace('\\','/',$filePath);
                 $picList[] = [
                     'serial_num'=>$key,
-                    'url'=>"/uploads/".$url
+                    'url'=>"/uploads/".str_replace('\\','/',$filePath)
                 ];
             }
 

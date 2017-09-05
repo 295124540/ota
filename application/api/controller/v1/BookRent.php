@@ -4,6 +4,7 @@ namespace app\api\controller\v1;
 use common\controller\ActiveController;
 use common\model\Book as BookModel;
 use common\model\Users as UsersModel;
+use think\Request;
 
 class BookRent extends ActiveController
 {
@@ -16,8 +17,8 @@ class BookRent extends ActiveController
     protected function setCondition(){
         $userId = paramFromGet('user_id');
         if($userId){
-            $this->condition = ['user_id'=>$userId];
-            $this->condition = ['status'=>1];
+            $this->condition['user_id']=$userId;
+            $this->condition['status']=1;
         }
     }
 

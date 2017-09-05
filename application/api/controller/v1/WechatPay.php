@@ -67,7 +67,7 @@ class WechatPay extends ApiBaseController
                 $type = Config::WX_CHANNEL_QR;// 微信 扫码支付
 
             }elseif($param['pay_way']=='APP') {
-
+                $wxconfig = config('thirdaccount.app_wx_pay');
                 $type = Config::WX_CHANNEL_APP;// 微信 APP支付
 
             }elseif($param['pay_way']=='LITE') {
@@ -92,7 +92,10 @@ class WechatPay extends ApiBaseController
             $url = "http://paysdk.weixin.qq.com/example/qrcode.php?data={$data}";
             return $url;
         }else {
-           return json_decode($ret,true);
+           if(is_string($ret)){
+               $ret = json_decode($ret,true);
+           }
+           return $ret;
         }
     }
 
@@ -108,13 +111,13 @@ class WechatPay extends ApiBaseController
         if($order->status>0)error('该订单已支付，请勿重复支付！');
         $payMoney = $order->pay_money;
         if($payMoney<=0)error('此订单为免费订单无需支付！');
-        $attach = ['action'=>'hotel_order'];
+        $attach = ['action'=>'hotel_order','order_id'=>$order->hotel_order_id];
 
         // 订单信息
         $payData = [
-            "order_no"	=> $order->hotel_order_id,
-            "amount"	=> $payMoney+200,//后面200是押金，支付通知成功时写入数据表
-            //"amount"	=> 0.01,
+            "order_no"	=> 'HO'.time(),
+            //"amount"	=> $payMoney+200,//后面200是押金，支付通知成功时写入数据表
+            "amount"	=> 0.01,
             "client_ip"	=> '127.0.0.1',
             "subject"	=> '在线支付',
             "body"	=> '云宿网络',
@@ -143,9 +146,9 @@ class WechatPay extends ApiBaseController
         // 订单信息
         $payData = [
             "order_no"	=> 'RB'.time(),// 商户网站唯一订单号
-            "product_id"=> $brm->id,// 商品ID
-            "amount"	=> 0.01,
-            //"amount"	=> $brm->guaranty_money,
+            //"product_id"=> $brm->id,// 商品ID
+            "amount"	=> 0.1,
+            "amount"	=> $brm->guaranty_money,
             "client_ip"	=> '127.0.0.1',
             "subject"	=> '在线支付', // 商品名称,该参数最长为128个汉字
             "body"	=> '租书押金',// 商品描述

@@ -78,7 +78,7 @@ class Notify extends Controller{
             $attach = json_decode($rt['attach'],true);
             // 民宿预订
             if($attach['action']=='hotel_order'){
-                $orderId = $rt['out_trade_no'];
+                $orderId = $attach['order_id'];
                 $orderModel = HotelOrderModle::get($orderId);
                 if($orderModel){
                     if( $orderModel->status == 0){

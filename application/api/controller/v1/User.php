@@ -40,9 +40,9 @@ class User extends ApiBaseController
         $user = UsersModel::get($id);
         if($user){
             $user = $user->visible(['yunsu_id','nickname','head_img_url','sex','city',])->toArray();
-            $user['rent_book_num']=0;
-            $user['donate_book_num']=0;
-            $user['check_in_hotel_num']=0;
+            $user['rent_book_num']=BookRent::where(['user_id'=>$id])->count();
+            $user['donate_book_num']=BookDonate::where(['user_id'=>$id])->count();
+            $user['check_in_hotel_num']=HotelOrder::where(['user_id'=>$id])->count();
             $m = Concern::get(['user_id'=>$this->userId,'concern_user_id'=>$id]);
             if($m){
                 $user['is_concern'] = 1;
