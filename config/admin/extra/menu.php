@@ -26,7 +26,7 @@ return [
         'item' => [
             [
                 'name' => '民宿客栈',
-                'url' => '/admin/house',
+                'url' => '/admin/hotel',
                 'auth_role' => '1,2,3'
             ],
             [

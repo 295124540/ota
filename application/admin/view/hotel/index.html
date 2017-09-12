@@ -17,14 +17,13 @@
     <h2>民宿客栈</h2>
     <div class="title_tab">
         <ul class="tab_navs title_tab">
-            <li class="tab_nav first js_top selected"><a href="javascript:void(0);">全部民宿</a></li>
-            <li class="tab_nav first js_top"><a href="javascript:void(0);">营业中</a></li>
-            <li class="tab_nav first js_top"><a href="javascript:void(0);">最受欢迎</a></li>
+            <li class="tab_nav first js_top {if condition='$type==1'} selected {/if}"><a href="/admin/hotel/index.html?type=1">营业中</a></li>
+            <li class="tab_nav first js_top {if condition='$type==-1'} selected {/if}"><a href="/admin/hotel/index.html?type=-1">未营业</a></li>
         </ul>
     </div>
 </div>
 <div class="main_bd">
-    <a class="btn btn_primary" href="/admin/house/create">新增</a>
+    <a class="btn btn_primary" href="/admin/hotel/create">新增</a>
 
     {volist name="list" id="hotel"}
     <div class="list_item">
@@ -47,7 +46,7 @@
                 <a class="btn btn_primary" style="width: 90px" href="/admin/room?house_id={$hotel.id}">房间管理</a>
             </div>
             <div style="margin-top: 10px">
-                <a class="btn btn_primary" style="width: 90px" href="/admin/house/edit/id/{$hotel.id}">修改民宿</a>
+                <a class="btn btn_primary" style="width: 90px" href="/admin/hotel/edit/id/{$hotel.id}">修改民宿</a>
             </div>
             <div style="margin-top: 10px">
                 {switch name='hotel.status'}
@@ -73,7 +72,7 @@
         }
         if(confirm("你确认"+ac+"营业么？")){
 
-            $.post('/admin/house/toggle/id/'+id,{status:sta},function (data,status) {
+            $.post('/admin/hotel/toggle/id/'+id,{status:sta},function (data,status) {
                 if(data['code']==100){
                     window.location = "";
                 }else {
