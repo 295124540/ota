@@ -1,22 +1,15 @@
 <div class="main_hd">
-    <h2>运营管理者</h2>
+    <h2>书童理者</h2>
     <div class="title_tab">
         <ul class="tab_navs title_tab">
-            <li class="tab_nav first js_top"><a href="/admin/user/getList" id="reloadTop">人员列表</a></li>
-            <li class="tab_nav js_top selected"><a href="javascript:void(0);" id="blackTop">添加管理者</a></li>
+            <li class="tab_nav first js_top"><a href="/admin/user/child" >书童列表</a></li>
+            <li class="tab_nav js_top selected"><a href="#">添加书童</a></li>
         </ul>
     </div>
 </div>
 <div class="main_bd">
     <form class="form" action="/admin/user/doAddAdmin" method="post">
-        <div class="form_group">
-            <label>管理角色</label>
-            <select name="role">
-                <option value="1">普通管理员</option>
-                <option value="2">民宿店家</option>
-                <option value="3">书童</option>
-            </select>
-        </div>
+        <input type="hidden" name="type" value="3">
         <div class="form_group">
             <label>姓名</label>
             <input type="text" name="phone" maxlength="6" />
@@ -27,11 +20,11 @@
         </div>
         <div class="form_group">
             <label>邮箱</label>
-            <input type="text" name="email"  />
+            <input type="text" name="email"  maxlength="20"/>
         </div>
         <div class="form_group">
             <label>密码</label>
-            <input type="password" name="password"  />
+            <input type="password" name="password"  maxlength="10"/>
         </div>
         <button class="btn btn_primary">提交</button>
     </form>
