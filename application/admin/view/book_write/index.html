@@ -29,9 +29,9 @@
             <td>{$x.create_time|date='Y-m-d H:i',###}</td>
             <td>{$x.new_chapter.update_time|date='Y-m-d H:i',###}</td>
             <td>
-                <a class="btn btn_primary" href="/admin/book_write/edit?id={$x.id}">更新</a>
-                <a class="btn btn_primary" href="#">完成</a>
-                <a class="btn btn_primary" href="/admin/book_write/delete/id/{$x.id}">删除</a>
+                <div style="margin: 5px"><a class="btn btn_primary" href="/admin/book_write/edit?id={$x.id}">更新</a></div>
+                <div style="margin: 5px"><a class="btn btn_primary" href="#">完成</a></div>
+                <div style="margin: 5px"><a class="btn btn_primary" href="/admin/book_write/delete/id/{$x.id}">删除</a></div>
             </td>
         </tr>
         {/volist}

@@ -5,6 +5,7 @@ use common\controller\AdminController;
 
 use common\model\Admin as AdminModel;
 use common\model\BookHouse as BookHouseModel;
+use common\model\BookWriteChapter;
 
 class BookWrite extends AdminController
 {
@@ -99,12 +100,18 @@ class BookWrite extends AdminController
             }
 
             $rt = $model->allowField(true)->save($params);
+            if($params['chapter_id']){
+                $chapter = BookWriteChapter::get($params['chapter_id']);
+                if($chapter==null)$this->error("该章节不存在！");
+                $rt = $chapter->allowField(true)->save($params);
+                $this->success("更新成功!","index");
+            }
             if($model->new_chapter){
                 $newSequence = $model->new_chapter->sequence+1;
             }else{
                 $newSequence = 1;
             }
-            $rt2 = $model->chapter()->save(['content'=>$_POST['content'],'sequence'=>$newSequence]);
+            $rt2 = $model->chapter()->save(['title'=>$_POST['title'],'content'=>$_POST['content'],'sequence'=>$newSequence]);
             if($rt||$rt2){
                 $this->success("更新成功！","index");
             }else{

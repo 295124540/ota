@@ -1,3 +1,6 @@
+<style>
+
+</style>
 <div class="main_hd">
     <h2>更新</h2>
     <div class="title_tab">
@@ -36,29 +39,26 @@
         <div class="goods_desc_box form_group">
             <div style="overflow: hidden">
                 <div style="float: left;width: 48%">
-                    <div  style="display: table-cell;width: 70px">最新章节</div>
+                    <div id="chapter" style="display: table-cell;width: 70px">最新章节</div>
                     <div style="display: table-cell">
-                        <textarea name="content" rows="18" cols="46" placeholder="请更新最新章节" style="padding: 10px" ></textarea>
+                        <input id="chapter_id" name="chapter_id" type="hidden">
+                        <input id="title" name="title" style="width: 349px" placeholder="本章标题">
+                        <textarea id="content" name="content" rows="18" cols="46" placeholder="请更新最新章节" style="padding: 10px" ></textarea>
                     </div>
                 </div>
                 <div style="float: left;width: 48%">
                     <div style="display: table-cell;width: 70px">历史章节</div>
-                    <div style="display: table-cell">{volist name="$model.chapter" id="m"}第{$m.sequence}章：{$m.content}<br>{/volist}</div>
+                    <div style="display: table-cell">
+                        {volist name="$model.chapter" id="m"}
+                            <div>
+                                <label>第{$m.sequence}章：{$m.title}</label>
+                                <img onclick="edit('{$m.id}')" width="15px" src="/static/img/edit.png">
+                                <img onclick="del('{$m.id}')" width="15px" src="/static/img/del.png">
+                            </div>
+                        {/volist}
+                    </div>
                 </div>
             </div>
-
-
-            <!--
-            <script class="ueditor" id="container" name="new_chapter" type="text/plain"> </script>
-            <script type="text/javascript" src="/ueditor/ueditor.config.js"></script>
-            <script type="text/javascript" src="/ueditor/ueditor.all.js"></script>
-            <script type="text/javascript">
-                var ue = UE.getEditor('container',{
-                    // initialFrameWidth:800,
-                    // initialFrameHeight:300
-                });
-            </script>
-            -->
         </div>
         <div class="current_box">
             <input type="button" onclick="submit()" name="next" class="next btn btn_primary " value="提交" />
@@ -115,5 +115,24 @@
     function submit(){
         // return false;
         document.form[0].submit();
+    }
+
+    function edit(id) {
+        $.get('/admin/book_write_chapter/read/id/'+id,function (data) {
+            console.log(id);
+            console.log(data);
+            $('#chapter_id').val(id);
+            $('#chapter').text('第'+data.sequence+'章');
+            $('#title').val(data.title);
+            $('#content').text(data.content);
+        })
+    }
+
+    function del(id) {
+        if(confirm('是否确认删除，删除后无法恢复！')){
+            $.get('/admin/book_write_chapter/delete/id/'+id,function (ret) {
+                window.location="";
+            })
+        }
     }
 </script>
