@@ -42,8 +42,9 @@
                     <div id="chapter" style="display: table-cell;width: 70px">最新章节</div>
                     <div style="display: table-cell">
                         <input id="chapter_id" name="chapter_id" type="hidden">
-                        <input id="title" name="title" style="width: 349px" placeholder="本章标题">
-                        <textarea id="content" name="content" rows="18" cols="46" placeholder="请更新最新章节" style="padding: 10px" ></textarea>
+                        <input id="sequence" name="sequence" style="width: 60px" placeholder="章节数" type="number" onblur="save(this)">
+                        <input id="title" name="title" style="width: 273px" placeholder="本章标题" onblur="save(this)">
+                        <textarea id="content" name="content" rows="18" cols="46" placeholder="请更新最新章节" onblur="save(this)" style="padding: 10px" ></textarea>
                     </div>
                 </div>
                 <div style="float: left;width: 48%">
@@ -60,7 +61,7 @@
                 </div>
             </div>
         </div>
-        <div class="current_box">
+        <div id="save" class="current_box">
             <input type="button" onclick="submit()" name="next" class="next btn btn_primary " value="提交" />
         </div>
 
@@ -119,10 +120,9 @@
 
     function edit(id) {
         $.get('/admin/book_write_chapter/read/id/'+id,function (data) {
-            console.log(id);
-            console.log(data);
             $('#chapter_id').val(id);
             $('#chapter').text('第'+data.sequence+'章');
+            $('#sequence').val(data.sequence);
             $('#title').val(data.title);
             $('#content').text(data.content);
         })
@@ -134,5 +134,17 @@
                 window.location="";
             })
         }
+    }
+
+    function save(e) {
+        var id = $('#chapter_id').val();
+        if(!id)return;
+        var params = {};
+        params[$(e).attr('name')]=$(e).val();
+        $.post('/admin/book_write_chapter/update/id/'+id,params,function (ret) {
+            if(ret['code']==-1){
+                alert(ret['msg']);
+            }
+        })
     }
 </script>
