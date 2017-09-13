@@ -188,8 +188,8 @@
                 <div class="sku_box" style="overflow: hidden">
                     {volist name="supportFacility" id="support"}
                     <div class="suppor_item">
-                        <input name="support[]" style="width: 20px" type="checkbox" value="{$support.id}"/><img
-                            width="40px" src="{$support.img}"><label>{$support.name}</label>
+                        <label><input name="support[]" style="width: 20px" type="checkbox" value="{$support.id}"/><img
+                            width="40px" src="{$support.img}">{$support.name}</label>
                     </div>
                     {/volist}
                 </div>

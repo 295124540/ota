@@ -2,8 +2,11 @@
     <h2>租书记录</h2>
     <div class="title_tab">
         <ul class="tab_navs title_tab">
-            <li class="tab_nav first js_top  selected"><a href="javascript:void(0);" id="reloadTop">全部记录</a></li>
-            <li class="tab_nav js_top"><a href="#" id="blackTop">出租中</a></li>
+            <!-- 0初始  1出租中 2已归还 3已到期 -->
+            <li class="tab_nav first js_top {if condition='$type==null'} selected {/if}"><a href="/admin/book_rent">全部记录</a></li>
+            <li class="tab_nav js_top {if condition='$type==1'} selected {/if}"><a href="/admin/book_rent?type=1">出租中</a></li>
+            <li class="tab_nav js_top {if condition='$type==2'} selected {/if}"><a href="/admin/book_rent?type=2">已归还</a></li>
+            <li class="tab_nav js_top {if condition='$type==3'} selected {/if}"><a href="/admin/book_rent?type=3">已到期</a></li>
         </ul>
     </div>
 </div>

@@ -181,9 +181,9 @@
                 <div class="sku_box" style="overflow: hidden">
                     {volist name="supportFacility" id="support"}
                     <div class="suppor_item">
-                        <input name="support[]" {foreach $model.support as $v}
+                        <label><input name="support[]" {foreach $model.support as $v}
                                {if condition="$support.id eq  $v.id"} checked="checked" {/if}
-                               {/foreach}  style="width: 20px" type="checkbox" value="{$support.id}" /><img width="40px" src="{$support.img}"><label>{$support.name}</label>
+                               {/foreach}  style="width: 20px" type="checkbox" value="{$support.id}" /><img width="40px" src="{$support.img}">{$support.name}</label>
                     </div>
                     {/volist}
                 </div>

@@ -8,5 +8,49 @@
     </div>
 </div>
 <div class="main_bd">
-    <div>研发中.....</div>
+    <div class="form_group">
+        <label>订单号：{$model.hotel_order_id}</label>
+    </div>
+    <div class="form_group">
+        <label>创建时间：{$model.create_time|date='Y-m-d H:i',###}</label>
+    </div>
+    <div class="form_group">
+        <label>支付价格：{$model.pay_money}元</label>
+    </div>
+    <div class="form_group">
+        <label>民宿：{$model.hotel_name}</label>
+    </div>
+    <div class="form_group">
+        <label>入住时间：{$model.arrive_time|date='Y-m-d H:i',###}</label>
+    </div>
+    <div class="form_group">
+        <label>退房时间：{$model.leave_time|date='Y-m-d H:i',###}</label>
+    </div>
+    <div class="form_group">
+        <label>姓名：{$model.user.nickname}</label>
+    </div>
+    <div class="form_group">
+        <label>电话：{$model.user.phone}</label>
+    </div>
+    <div class="form_group">
+        <label>类型：{if condition="$model.room_id!=null||$model.room_id!=''"}
+            单间{model.room_id}
+            {else/}
+            整套
+            {/if}</label>
+    </div>
+    <div class="form_group">
+        <label>
+            订单状态：  {switch name="model.status"}
+            {case value="-1"}<span style="color: #ff5500">已取消</span>{/case}
+            {case value="0"}<span style="color: #ff5500">待支付</span>{/case}
+            {case value="1"}<span style="color: #4FAB1C">待消费</span>{/case}
+            {case value="2"}<span style="color: #4FAB1C">正消费...</span>{/case}
+            {case value="3"}<span style="color: #4FAB1C">退房待审核</span>{/case}
+            {case value="4"}<span style="color: #4FAB1C">已退房，待评价</span>{/case}
+            {case value="4"}<span style="color: #4FAB1C">已完成</span>{/case}
+            {default /}订单异常
+            {/switch}
+        </label>
+    </div>
 </div>
