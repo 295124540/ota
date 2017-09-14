@@ -28,4 +28,5 @@ class BookWriteChapter extends AdminController
             $this->error("更新失败!");
         }
     }
+
 }

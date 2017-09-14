@@ -8,7 +8,7 @@ class BookWrite extends ActiveController
 {
 
     public $modelClass = 'common\model\BookWrite';
-    protected $loginAuth = ['except'=>'index,read'];
+    protected $authenticate = ['except'=>'index,read'];
 
 
     protected function findModel($id)

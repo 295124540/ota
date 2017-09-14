@@ -7,9 +7,7 @@ class HeartFeeling extends ActiveController
 {
 
     protected $modelClass = 'common\model\HeartFeeling';
-    protected $beforeActionList = [
-        'loginAuth' =>  ['except'=>'index,read'],
-    ];
+    protected $authenticate = ['except'=>'index,read'];
 
     /**
      * 上传图片

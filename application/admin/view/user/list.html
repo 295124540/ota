@@ -2,7 +2,7 @@
     <h2>运营管理者</h2>
     <div class="title_tab">
         <ul class="tab_navs title_tab">
-            <li class="tab_nav first js_top  selected"><a href="javascript:void(0);" id="reloadTop">人员列表</a></li>
+            <li class="tab_nav first js_top  selected"><a href="javascript:void(0);" id="reloadTop">运营者列表</a></li>
             <li class="tab_nav js_top"><a href="/admin/user/addAdmin" id="blackTop">添加管理者</a></li>
         </ul>
     </div>
@@ -40,8 +40,8 @@
                 {/switch}
             </td>
             <td>
-                <a class="btn btn_primary" href="#">修改</a>
-                <a class="btn" href="#">删除</a>
+                <a class="btn btn_primary" href="/admin/user/edit/id/{$manager.id}">修改</a>
+                <a class="btn" href="#" onclick="javascript:alert('删除运营管理人员，会导致系统错误，如需删除请联系工程师！')">删除</a>
             </td>
         </tr>
         {/volist}

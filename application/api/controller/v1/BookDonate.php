@@ -8,7 +8,7 @@ class BookDonate extends ActiveController
 {
 
     protected $modelClass = 'common\model\BookDonate';
-    protected $loginAuth = ['except'=>'index'];
+    protected $authenticate = ['except'=>'index'];
     protected $order = 'donate_time DESC';
 
     protected $beforeActionList = [

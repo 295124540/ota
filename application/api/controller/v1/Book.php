@@ -10,7 +10,7 @@ use think\Db;
 class Book extends ActiveController
 {
     protected $modelClass = 'common\model\Book';
-    protected $loginAuth =  ['except'=>'index,read,category'];
+    protected $authenticate =  ['except'=>'index,read,category'];
 
     protected function findModel($id)
     {

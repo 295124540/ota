@@ -12,7 +12,7 @@ use think\Request;
 
 class WechatPay extends ApiBaseController
 {
-    protected $loginAuth = ['except'=>'index'];
+    protected $authenticate = ['except'=>'index'];
     protected $rule = [
         'hotel_order_id'  => 'require',
         'pay_way'  => 'require|in:APP,QR,LITE,PUB',

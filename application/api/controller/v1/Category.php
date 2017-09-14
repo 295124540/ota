@@ -10,7 +10,7 @@ use common\model\BookRent;
 class Category extends ActiveController
 {
     protected $modelClass = 'common\model\Category';
-    protected $loginAuth =  ['only'=>''];
+    protected $authenticate =  ['only'=>''];
     protected $beforeActionList = ['condition'=>['only'=>'index']];
 
     protected function condition()

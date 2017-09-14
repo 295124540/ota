@@ -110,7 +110,7 @@ class BookDonate extends AdminController
                         // 2生成动态记录
                         // 0未知 1心情  2民宿评 3书评 4捐书 5租书
                         $m = DynamicModel::get(['source_id'=>$donateModel->id,'type'=>4]);
-                        if(!$m){
+                        if(!$m&&$userModel){
                             $param = [
                                 'user_id'=> $userModel->yunsu_id,
                                 'user_name'=>  $userModel->nickname,

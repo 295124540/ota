@@ -9,7 +9,7 @@ class House extends ActiveController
 
     protected $modelClass = 'common\model\House';
 
-    protected $loginAuth = ['except'=>'index,read'];
+    protected $authenticate = ['except'=>'index,read'];
 
     /**
      * 民宿列表（最新、随机推荐）

@@ -10,6 +10,5 @@ use think\Db;
 class ErrorLog extends ActiveController
 {
     protected $modelClass = 'common\model\ErrorLog';
-    protected $loginAuth =  ['only'=>''];
 
 }

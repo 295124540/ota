@@ -8,9 +8,7 @@ use common\model\Order as OrderModel;
 class CashPledge extends ActiveController
 {
     protected $modelClass = 'common\model\CashPledge';
-    protected $beforeActionList = [
-        'loginAuth' =>  ['except'=>'index,read'],
-    ];
+    protected $authenticate = ['except'=>'index,read'];
 
     public function save()
     {

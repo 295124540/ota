@@ -11,7 +11,7 @@ class PriceCalendar extends ActiveController
 {
 
     protected $modelClass = 'common\model\RoomPriceCalendar';
-    protected $loginAuth = ['except'=>'index,read,save'];
+    protected $authenticate = ['except'=>'index,read,save'];
 
     /**
      * 价格日历

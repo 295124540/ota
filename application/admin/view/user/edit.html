@@ -1,0 +1,28 @@
+<div class="main_hd">
+    <h2>运营者管理</h2>
+    <div class="title_tab">
+        <ul class="tab_navs title_tab">
+            <li class="tab_nav first js_top"><a href="/admin/user/getList" >运营者列表</a></li>
+            <li class="tab_nav js_top selected"><a href="#">添加运营者</a></li>
+        </ul>
+    </div>
+</div>
+<div class="main_bd">
+    <form class="form" action="/admin/user/updChild/id/{$model.id}" method="post">
+        <input type="hidden" name="type" value="3">
+        <div class="form_group">
+            <label>姓名</label>
+            <input type="text" name="phone" value="{$model.name}" maxlength="6" />
+        </div>
+        <div class="form_group">
+            <label>电话</label>
+            <input type="text" name="phone" value="{$model.phone}" maxlength="11" />
+        </div>
+        <div class="form_group">
+            <label>邮箱</label>
+            <input type="text" name="email" value="{$model.email}" maxlength="20"/>
+        </div>
+        <button class="btn btn_primary">确认修改</button>
+    </form>
+</div>
+

@@ -10,7 +10,7 @@ class Dynamic extends ActiveController
 
     protected $modelClass = 'common\model\Dynamic';
     protected $order = "create_time desc";
-    protected $loginAuth = ['except'=>'index,read,mood'];
+    protected $authenticate = ['except'=>'index,read,mood'];
 
     protected function prepareDataProvider()
     {

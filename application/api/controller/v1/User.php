@@ -13,7 +13,7 @@ use common\model\BookRent;
 class User extends ApiBaseController
 {
 
-    protected  $loginAuth = ['only'=>'read,update,isMember,concern'];
+    protected  $authenticate = ['only'=>'read,update,isMember,concern'];
 
 
     public function index(){
