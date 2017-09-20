@@ -2,13 +2,13 @@
 namespace app\admin\controller;
 
 use common\controller\AdminController;
-use common\model\House as HouseModel;
-use common\model\SupportFacility as SupportFacilityModel;
+use common\model\Hotel as HotelModel;
+use common\model\HotelSupportFacility as SupportFacilityModel;
 
 class Hotel extends AdminController
 {
 
-    protected $modelClass = 'common\model\House';
+    protected $modelClass = 'common\model\Hotel';
     protected $beforeActionList = [
         'htmlVariable'  =>  ['only'=>'create,edit'],
     ];
@@ -60,7 +60,7 @@ class Hotel extends AdminController
      */
     public function doAdd(){
         $params = request()->param();
-        $house = new HouseModel();
+        $house = new HotelModel();
         $house->allowField(true)->data($params,true);
         $house->create_time = time();
         $house->save();
@@ -117,7 +117,7 @@ class Hotel extends AdminController
      */
     public function update($id){
         $params = request()->param();
-        $house = HouseModel::get($id);
+        $house = HotelModel::get($id);
         if(!$house){
             $this->error('你的思想有点漂浮哦，系统完全跟不上！');
         }

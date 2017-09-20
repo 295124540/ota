@@ -13,7 +13,7 @@ use common\model\Comment as CommentModel;
 use common\model\CommentReply as CommentReplyModel;
 use common\model\HotelOrder as HotelOrderModel;
 use common\model\Users as UsersModel;
-use common\model\House as HouseModel;
+use common\model\Hotel as HouseModel;
 use common\model\Book as BookModel;
 use common\model\Dynamic as DynamicModel;
 

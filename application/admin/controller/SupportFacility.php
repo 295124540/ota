@@ -11,7 +11,7 @@ use common\model\Category as CategoryModel;
 class SupportFacility extends AdminController
 {
 
-    protected $modelClass = 'common\model\SupportFacility';
+    protected $modelClass = 'common\model\HotelSupportFacility';
 
 
     /**

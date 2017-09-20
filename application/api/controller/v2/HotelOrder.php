@@ -9,9 +9,9 @@
 namespace app\api\controller\v2;
 
 use common\controller\ActiveController;
-use common\model\House as HouseModel;
-use common\model\Room as RoomModel;
-use common\model\Order as OrderModel;
+use common\model\Hotel as HouseModel;
+use common\model\HotelRoom as RoomModel;
+use common\model\HotelOrder as HotelOrderModel;
 use common\model\HotelReservation;
 use common\model\Users as UsersModel;
 use think\Request;
@@ -19,13 +19,22 @@ use think\Request;
 
 class HotelOrder extends ActiveController
 {
-    protected $modelClass = 'common\model\Order';
+    protected $modelClass = 'common\model\HotelOrder';
+    protected $authenticate = ['only'=>'save'];
     protected $order = "create_time desc";
-    protected $condition = ['type'=>1];
+
+    protected $rule = [
+        'hotel_id'   => 'require|number|max:25',
+        'room_id'    => 'number|max:25',
+        'point'      => 'number|between:0,10000',
+        'arrive_time'=> 'require|number|length:10',
+        'leave_time' => 'require|number|length:10|>:arrive_time',
+
+    ];
 
     protected function findModel($id)
     {
-        $m = OrderModel::get(['user_id'=>$this->userId,'id'=>$id]);
+        $m = HotelOrderModel::get(['user_id'=>$this->userId,'hotel_order_id'=>$id]);
         if($m){
             return $m;
         }else{
@@ -33,29 +42,26 @@ class HotelOrder extends ActiveController
         }
     }
 
-
-    /**
-     * 订单列表
-     */
-    public function index()
+    protected function prepareDataProvider()
     {
         $this->condition['user_id'] = $this->userId;
-        $list = $this->prepareDataProvider();
-        foreach ($list as $model){
-            $model->item;
+        $list = parent::prepareDataProvider();
+        foreach ($list as $m){
+
+            if($m->status>=1){
+                if($m->leave_time<time()){
+                    $m->status = 4; // 消费完成 待评价
+                    $m->save();
+                }else{
+                    if($m->arrive_time<time()){
+                        $m->status = 2;// 正在消费
+                        $m->save();
+                    }
+                }
+            }
         }
-        success($list);
-    }
 
-    /**
-     * 订单详情
-     */
-    public function read($id)
-    {
-        $this->condition['user_id'] = $this->userId;
-        $model = $this->findModel($id);
-        $model->item;
-        success($model);
+        return $list;
     }
 
     /**
@@ -63,73 +69,44 @@ class HotelOrder extends ActiveController
      */
     public function save(){
 
-        $rule = [
-            'hotel_id'   => 'require|max:25',
-            'room_id'    => 'number',
-            'arrive_time'=>'require',
-            'leave_time' =>'require',
-            'pay_money'  => 'require|number|between:0,10000',
-        ];
-
         $params = Request::instance()->param();
-        $this->validate($params,$rule);
+        $this->validate($params,$this->rule);
         $params['user_id']=$this->userId;
-        $params['user_name']=$this->user['nickname'];
 
+        $hotel = HouseModel::get($params['hotel_id']);
+        if($hotel==null)error("对不起，该民宿不存在！");
 
-        $list = HouseModel::all($params['source_id']);
-        if($list==null){
-            error("对不起，该民宿不存在！");
-        }
+        $params['hotel_name'] = $hotel->name;
+        $params['hotel_img'] = $hotel->img[0]['url'];// 民宿主图
+        $params['total_money'] = $params['pay_money']+$params['deduction_money'];//总价
 
-        foreach ($list as $m){
-            $params['describe'] = $m->name;
-            $hotelImg = $m->img[0]['url'];// 民宿主图，用来订单封面
-        }
-
-        $roomId = paramFromPost('room_id');
-        if($roomId==null){//整套
-            $type = 0;
-            $this->reservation($params['source_id'],$params['arrive_time'],$params['leave_time']);//整套、写入民宿预订时间
-        }else{//单套
-            $list = RoomModel::all($roomId);
-            $type = 1;
-            $this->reservation($params['source_id'],$params['arrive_time'],$params['leave_time'],$roomId);//单间、写入民宿预订时间
-        }
-
-        $model = new OrderModel($params);
-        $model->allowField(true)->save();
-        foreach ($list as $k=>$m){
-
-            $item[$k] = [
-                'source_id'  => $m->id,
-                'type'       => $type,
-                'source_name'=> $m->name,
-                'img'        => $m->img?$m->img[0]['url']:$hotelImg,
-                'price'      => $m->price,
-                'num'        => 1,
-                'total_money'=> 1*$m->price
-            ];
-        }
-        if(isset($item)){
-            $model->item()->saveAll($item);
-        }
-
-        $userModel = UsersModel::get($this->userId);
-        if($userModel){
-            if($params['discount_money']){
-                $userModel->point = $userModel->point- ($params['discount_money']*50);// 50个积分可以抵扣1元钱
-                $userModel->save();
+        if(isset($params['room_id'])){
+            $room = RoomModel::get(['id'=>$params['room_id'],'house_id'=>$params['hotel_id']]);
+            if($room){
+                $this->reservation($params['hotel_id'],$params['arrive_time'],$params['leave_time'],$params['room_id']);//单间、写入民宿预订时间
+            }else{
+                error("该民宿不存在".$params['room_id']."ID房间！");
             }
+
+        }else {
+            $this->reservation($params['hotel_id'],$params['arrive_time'],$params['leave_time']);//整套、写入民宿预订时间
         }
 
-        if($model){
-            $model->item;
-            api(100,"下单成功",$model);
+        $model = new HotelOrderModel($params);
+        $rt = $model->allowField(true)->save();
+
+        if($rt){
+            $userModel = UsersModel::get($this->userId);
+            if($userModel){
+                if($params['deduction_money']){
+                    $userModel->point = $userModel->point- ($params['deduction_money']*50);// 50个积分可以抵扣1元钱
+                    $userModel->save();
+                }
+            }
+            success($model);
         }else{
-            error("失败！".$model->getError());
+            error("下单失败哦！");
         }
-
     }
 
     /**
@@ -137,18 +114,19 @@ class HotelOrder extends ActiveController
      */
     public function cancel($id){
         $order = $this->findModel($id);
-        if($order->status!=0){
+        if($order->status==0||$order->status==1){
+            $order->status = -1;
+            if($order->save()){
+                api(100,"取消成功！");
+            }else{
+                error("取消失败！");
+            }
+        }else{
             if($order->status==-1){
                 error("该订单状态为：".$order->status.",已经取消,请勿重复操作！");
             }else{
                 error("该订单状态为：".$order->status.",不满足取消条件！");
             }
-        }
-        $order->status = -1;
-        if($order->save()){
-            api(100,"取消成功！");
-        }else{
-            error("取消失败！");
         }
     }
 
@@ -156,13 +134,13 @@ class HotelOrder extends ActiveController
      * 退房
      */
     public function checkOut($id){
-        $order = $this->findModel($id);
-        if($order->status !=1) error("你的订单不满足退房要求,状态码：".$order->status);
-        $order->status = 2 ;//待退房
-        if($order->save()){
+        $drder = $this->findModel($id);
+        if($drder->status !=2) error("只有正在消费中的订单，才能退房,状态码：".$drder->status);
+        $drder->status = 3 ;//待退房
+        if($drder->save()){
             api(100,"退房成功！");
         }else{
-            error("退房失败！".$order->getError());
+            error("退房失败！".$drder->getError());
         }
 
     }

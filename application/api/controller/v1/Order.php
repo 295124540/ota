@@ -9,8 +9,8 @@
 namespace app\api\controller\v1;
 
 use common\controller\ActiveController;
-use common\model\House as HouseModel;
-use common\model\Room as RoomModel;
+use common\model\Hotel as HouseModel;
+use common\model\HotelRoom as RoomModel;
 use common\model\Order as OrderModel;
 use common\model\HotelReservation;
 use common\model\Users as UsersModel;

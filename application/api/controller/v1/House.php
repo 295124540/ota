@@ -7,7 +7,7 @@ use common\model\Collect;
 class House extends ActiveController
 {
 
-    protected $modelClass = 'common\model\House';
+    protected $modelClass = 'common\model\Hotel';
 
     protected $authenticate = ['except'=>'index,read'];
 
