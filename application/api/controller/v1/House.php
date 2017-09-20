@@ -16,9 +16,10 @@ class House extends ActiveController
      */
     public function index(){
         $type = paramFromGet('type');
+        $this->condition = ['status'=>1];
         if($type==1){ //0最新；1为推荐
             $modelClass = $this->modelClass;
-            $list = $modelClass::order('RAND()')->limit(3)->select();
+            $list = $modelClass::where($this->condition)->order('RAND()')->limit(3)->select();
         }else{
             $list = $this->prepareDataProvider();
         }

@@ -42,6 +42,7 @@ return [
 
     ],
 
+    'api/book/search' => ['api/'.$v.'.book/search',['method' => 'get']],
     'api/dynamic/mybook' => ['api/'.$v.'.dynamic/mybook',['method' => 'get']],
     'api/dynamic/user/:id' => ['api/'.$v.'.dynamic/user',['method' => 'get'],['id' => '\d+']],
     'api/user/:id'       => ['api/'.$v.'.user/read',['method' => 'get'], ['id' => '\d+']],

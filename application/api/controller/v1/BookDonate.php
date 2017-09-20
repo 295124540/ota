@@ -40,6 +40,7 @@ class BookDonate extends ActiveController
     public function save(){
 
         $params = paramFromPost();
+        success($params);
 
         $rule = [
             ['phone|phone,电话号码','require|max:11'],
