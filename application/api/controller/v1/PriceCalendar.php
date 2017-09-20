@@ -17,8 +17,8 @@ class PriceCalendar extends ActiveController
      * 价格日历
      */
     public function index(){
-        $houseId = paramFromGet('house_id',true);
-        $houseModel = HouseModel::get($houseId);
+        $hotelId = paramFromGet('hotel_id',true);
+        $houseModel = HouseModel::get($hotelId);
         if(!$houseModel){
             error("没有该ID的民宿！");
         }
@@ -28,11 +28,11 @@ class PriceCalendar extends ActiveController
             if(!$roomModel){
                 error("该民宿没有此房间！");
             }
-            $reservation = HotelReservation::all(['hotel_id'=>$houseId,'room_id'=>$roomId]);
-            $list = PriceCalendarModel::all(['house_id'=>$houseId,'room_id'=>$roomId,'type'=>0]);//单间
+            $reservation = HotelReservation::all(['hotel_id'=>$hotelId,'room_id'=>$roomId]);
+            $list = PriceCalendarModel::all(['hotel_id'=>$hotelId,'room_id'=>$roomId,'type'=>0]);//单间
         }else{
-            $reservation = HotelReservation::all(['hotel_id'=>$houseId]);
-            $list = PriceCalendarModel::all(['house_id'=>$houseId,'type'=>1]);//整套
+            $reservation = HotelReservation::all(['hotel_id'=>$hotelId]);
+            $list = PriceCalendarModel::all(['hotel_id'=>$hotelId,'type'=>1]);//整套
         }
         $alreadyReservation = [];
         foreach ($reservation as $value){
@@ -47,7 +47,7 @@ class PriceCalendar extends ActiveController
     public function save()
     {
         $day = paramFromPost('day',true);
-        $houseId = paramFromPost('house_id',true);
+        $houseId = paramFromPost('hotel_id',true);
         $roomId = paramFromPost('room_id');
         $price = paramFromPost('price',true);
         if($roomId!=null){
@@ -55,9 +55,9 @@ class PriceCalendar extends ActiveController
             if(!$roomModel){
                 error("该民宿没有此房间！");
             }
-            $m = PriceCalendarModel::get(['house_id'=>$houseId,'room_id'=>$roomId,'day'=>$day,'type'=>0]);
+            $m = PriceCalendarModel::get(['hotel_id'=>$houseId,'room_id'=>$roomId,'day'=>$day,'type'=>0]);
         }else{
-            $m = PriceCalendarModel::get(['house_id'=>$houseId,'day'=>$day,'type'=>1]);
+            $m = PriceCalendarModel::get(['hotel_id'=>$houseId,'day'=>$day,'type'=>1]);
         }
 
         if($m){//有则修改

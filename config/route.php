@@ -25,7 +25,7 @@ return [
     //资源路由
     '__rest__'=>[
         //api
-        'api/house'=>['api/'.$v.'.house',['only'=>['index','read','create','save','edit','update','delete']]],
+        'api/hotel'=>['api/'.$v.'.hotel',['only'=>['index','read','create','save','edit','update','delete']]],
         'api/book'=>['api/'.$v.'.book',['only'=>['index','read','create','save','edit','update','delete']]],
         'api/book_rent'=>['api/'.$v.'.book_rent',['only'=>['index','read','save']]],
         'api/book_donate'=>['api/'.$v.'.book_donate',['only'=>['index','read','save']]],
