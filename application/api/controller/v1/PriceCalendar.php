@@ -2,10 +2,10 @@
 namespace app\api\controller\v1;
 
 use app\common\controller\ActiveController;
-use common\model\Hotel as HouseModel;
-use common\model\HotelRoom as RoomModel;
-use common\model\HotelPriceCalendar as PriceCalendarModel;
-use common\model\HotelReservation;
+use app\common\model\Hotel as HouseModel;
+use app\common\model\HotelRoom as RoomModel;
+use app\common\model\HotelPriceCalendar as PriceCalendarModel;
+use app\common\model\HotelReservation;
 
 class PriceCalendar extends ActiveController
 {

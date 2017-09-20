@@ -1,14 +1,14 @@
 <?php
 namespace app\api\controller\v1;
 
-use app\common\controller\ActiveController;
+use app\common\controller\ApiBaseController;
 use common\model\HotelOrder;
 use think\Db;
 
-use common\model\Users as UsersModel;
-use common\model\Concern;
-use common\model\BookDonate;
-use common\model\BookRent;
+use app\common\model\Users as UsersModel;
+use app\common\model\Concern;
+use app\common\model\BookDonate;
+use app\common\model\BookRent;
 
 class User extends ApiBaseController
 {

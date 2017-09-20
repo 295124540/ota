@@ -2,9 +2,6 @@
 namespace app\api\controller\v1;
 
 use app\common\controller\ActiveController;
-use common\model\Book as BookModel;
-use common\model\Users as UsersModel;
-use think\Request;
 
 class BookRent extends ActiveController
 {

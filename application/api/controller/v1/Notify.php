@@ -8,10 +8,10 @@ namespace app\api\controller\v1;
 
 use common\model\Book;
 use think\Controller;
-use common\model\HotelOrder as HotelOrderModle;
-use common\model\Users as UsersModel;
-use common\model\BookRent as BookRentModel;
-use common\model\Dynamic as DynamicModel;
+use app\common\model\HotelOrder as HotelOrderModle;
+use app\common\model\Users as UsersModel;
+use app\common\model\BookRent as BookRentModel;
+use app\common\model\Dynamic as DynamicModel;
 
 class Notify extends Controller{
 

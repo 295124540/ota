@@ -9,11 +9,11 @@
 namespace app\api\controller\v1;
 
 use app\common\controller\ActiveController;
-use common\model\Hotel as HouseModel;
-use common\model\HotelRoom as RoomModel;
-use common\model\Order as OrderModel;
-use common\model\HotelReservation;
-use common\model\Users as UsersModel;
+use app\common\model\Hotel as HouseModel;
+use app\common\model\HotelRoom as RoomModel;
+use app\common\model\Order as OrderModel;
+use app\common\model\HotelReservation;
+use app\common\model\Users as UsersModel;
 
 
 class Order extends ActiveController

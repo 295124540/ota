@@ -9,7 +9,7 @@
 namespace app\api\controller\v1;
 
 use app\common\controller\ActiveController;
-use common\model\Collect as CollectModel;
+use app\common\model\Collect as CollectModel;
 use think\Request;
 
 class Collect extends ActiveController

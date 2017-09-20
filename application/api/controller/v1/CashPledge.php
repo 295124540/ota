@@ -2,8 +2,7 @@
 namespace app\api\controller\v1;
 
 use app\common\controller\ActiveController;
-use common\model\CashPledge as CashPledgeModel;
-use common\model\Order as OrderModel;
+use app\common\model\CashPledge as CashPledgeModel;
 
 class CashPledge extends ActiveController
 {

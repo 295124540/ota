@@ -2,7 +2,7 @@
 namespace app\api\controller\v1;;
 
 use app\common\controller\ActiveController;
-use common\model\BookDonate as BookDonateModel;
+use app\common\model\BookDonate as BookDonateModel;
 
 class BookDonate extends ActiveController
 {

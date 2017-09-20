@@ -9,13 +9,13 @@
 namespace app\api\controller\v1;
 
 use app\common\controller\ActiveController;
-use common\model\Comment as CommentModel;
-use common\model\CommentReply as CommentReplyModel;
-use common\model\HotelOrder as HotelOrderModel;
-use common\model\Users as UsersModel;
-use common\model\Hotel as HouseModel;
-use common\model\Book as BookModel;
-use common\model\Dynamic as DynamicModel;
+use app\common\model\Comment as CommentModel;
+use app\common\model\CommentReply as CommentReplyModel;
+use app\common\model\HotelOrder as HotelOrderModel;
+use app\common\model\Users as UsersModel;
+use app\common\model\Hotel as HouseModel;
+use app\common\model\Book as BookModel;
+use app\common\model\Dynamic as DynamicModel;
 
 class Comment extends ActiveController{
 

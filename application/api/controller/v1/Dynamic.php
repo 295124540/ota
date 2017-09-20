@@ -2,10 +2,10 @@
 namespace app\api\controller\v1;
 
 use app\common\controller\ActiveController;
-use common\model\Dynamic as DynamicModel;
-use common\model\DynamicComment;
-use common\model\DynamicCommentReply;
-use common\model\Users as UsersModel;
+use app\common\model\Dynamic as DynamicModel;
+use app\common\model\DynamicComment;
+use app\common\model\DynamicCommentReply;
+use app\common\model\Users as UsersModel;
 use think\Request;
 
 class Dynamic extends ActiveController

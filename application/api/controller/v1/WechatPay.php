@@ -6,8 +6,8 @@ use app\common\controller\ApiBaseController;
 use Payment\ChargeContext;
 use Payment\Config;
 use Payment\Common\PayException;
-use common\model\HotelOrder as HotelOrderModel;
-use common\model\BookRent as BookRentModel;
+use app\common\model\HotelOrder as HotelOrderModel;
+use app\common\model\BookRent as BookRentModel;
 use think\Request;
 
 class WechatPay extends ApiBaseController
@@ -15,20 +15,20 @@ class WechatPay extends ApiBaseController
     protected $authenticate = ['except'=>'index'];
     protected $rule = [
         'hotel_order_id'  => 'require',
-        'pay_way'  => 'require|in:APP,QR,LITE,PUB',
-        'wx_openid'=>'requireIf:pay_way,LITE|requireIf:pay_way,PUB',
-        'rent_id'=>'require'
+        'pay_way'         => 'require|in:APP,QR,LITE,PUB',
+        'wx_openid'       => 'requireIf:pay_way,LITE|requireIf:pay_way,PUB',
+        'rent_id'         => 'require'
     ];
     protected $msg = [
         'hotel_order_id.require' => 'hotel_order_id民宿订单ID不能为空！',
-        'pay_way.require'=>'pay_way支付方式不能为空！',
-        'pay_way.in'=>'pay_way必须在 APP,QR,LITE,PUB 范围内，APP支付,QR扫码支付,LITE小程序支付,PUB公众号支付',
-        'wx_openid.requireIf'=>'wx_openid小程序、公众号支付，微信openID不能为空！',
-        'rent_id.require'=>'rent_id租书ID不能为空'
+        'pay_way.require'        => 'pay_way支付方式不能为空！',
+        'pay_way.in'             => 'pay_way必须在 APP,QR,LITE,PUB 范围内，APP支付,QR扫码支付,LITE小程序支付,PUB公众号支付',
+        'wx_openid.requireIf'    => 'wx_openid小程序、公众号支付，微信openID不能为空！',
+        'rent_id.require'        => 'rent_id租书ID不能为空'
     ];
     protected $scene = [
         'hotel_order'  =>  ['hotel_order_id','pay_way','wx_openid'],
-        'rent_book'   =>  ['rent_id','pay_way','wx_openid']
+        'rent_book'    =>  ['rent_id','pay_way','wx_openid']
     ];
 
     /**

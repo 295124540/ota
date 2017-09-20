@@ -2,7 +2,6 @@
 namespace app\api\controller\v1;
 
 use app\common\controller\ActiveController;
-use common\model\Book as BookModel;
 
 class BookWrite extends ActiveController
 {

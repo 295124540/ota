@@ -3,7 +3,7 @@ namespace app\api\controller\v1;
 
 use app\common\controller\ActiveController;
 use think\Request;
-use common\model\BookWriteChapter as BookWriteChapterModel;
+use app\common\model\BookWriteChapter as BookWriteChapterModel;
 
 
 class BookWriteChapter extends ActiveController

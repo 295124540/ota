@@ -15,12 +15,11 @@ use think\Request;
 class AdminController extends Controller
 {
 
-    protected $modelClass;//模型类，在子控制器中必须申明并赋值
     protected $authenticate;//登录身份鉴定
+    protected $modelClass;//模型类，在子控制器中必须申明并赋值
     protected $condition; //查询条件
     protected $order;// 排序
     protected $with;// 关联预载入
-
     protected $admin;//管理员
 
     /**

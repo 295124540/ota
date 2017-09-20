@@ -2,8 +2,8 @@
 namespace app\api\controller\v1;
 
 use app\common\controller\ActiveController;
-use common\model\Collect;
-use common\model\Users;
+use app\common\model\Collect;
+use app\common\model\Users;
 use think\Db;
 
 

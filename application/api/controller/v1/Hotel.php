@@ -2,7 +2,7 @@
 namespace app\api\controller\v1;
 
 use app\common\controller\ActiveController;
-use common\model\Collect;
+use app\common\model\Collect;
 
 class Hotel extends ActiveController
 {
