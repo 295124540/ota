@@ -1,7 +1,7 @@
 <?php
 namespace app\api\controller\v1;
 
-use common\controller\ApiBaseController;
+use app\common\controller\ActiveController;
 use common\model\HotelOrder;
 use think\Db;
 

@@ -1,7 +1,7 @@
 <?php
 namespace app\api\controller\v1;
 
-use common\controller\ActiveController;
+use app\common\controller\ActiveController;
 use common\model\Hotel as HouseModel;
 use common\model\HotelRoom as RoomModel;
 use common\model\HotelPriceCalendar as PriceCalendarModel;

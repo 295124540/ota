@@ -2,8 +2,7 @@
 namespace app\api\controller\v1;
 
 use alyun\AliyunOss;
-use common\controller\ActiveController;
-
+use app\common\controller\ActiveController;
 
 class PhotoAlbum extends ActiveController
 {

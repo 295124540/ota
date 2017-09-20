@@ -8,7 +8,7 @@
 
 namespace app\api\controller\v1;
 
-use common\controller\ActiveController;
+use app\common\controller\ActiveController;
 use common\model\Comment as CommentModel;
 use common\model\CommentReply as CommentReplyModel;
 use common\model\HotelOrder as HotelOrderModel;

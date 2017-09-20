@@ -1,7 +1,7 @@
 <?php
 namespace app\api\controller\v1;
 
-use common\controller\ActiveController;
+use app\common\controller\ActiveController;
 use common\model\CashPledge as CashPledgeModel;
 use common\model\Order as OrderModel;
 

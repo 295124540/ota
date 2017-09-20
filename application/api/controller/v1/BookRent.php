@@ -1,7 +1,7 @@
 <?php
 namespace app\api\controller\v1;
 
-use common\controller\ActiveController;
+use app\common\controller\ActiveController;
 use common\model\Book as BookModel;
 use common\model\Users as UsersModel;
 use think\Request;

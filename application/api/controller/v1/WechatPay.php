@@ -1,7 +1,7 @@
 <?php
 namespace app\api\controller\v1;
 
-use common\controller\ApiBaseController;
+use app\common\controller\ApiBaseController;
 
 use Payment\ChargeContext;
 use Payment\Config;

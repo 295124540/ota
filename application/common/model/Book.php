@@ -16,10 +16,6 @@ class Book extends Model
         'price'=>'float:2'
     ];
 
-    protected $field = [
-        'id'=>'Book.id'
-    ];
-
     public function book(){
         return $this->alias('b')->join('__BOOK_MODEL__ m','m.id = b.model_id')
             ->field('b.id book_id,name,cover_img,rent_num,read_num');

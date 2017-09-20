@@ -8,7 +8,7 @@
 
 namespace app\api\controller\v1;
 
-use common\controller\ActiveController;
+use app\common\controller\ActiveController;
 use common\model\Collect as CollectModel;
 use think\Request;
 
