@@ -166,7 +166,7 @@ class Hotel extends AdminController
         }
 
         if($house->id){
-            $this->success('修改成功！','/admin/house');
+            $this->success('修改成功！','index');
         }else{
             $this->error('修改失败！');
         }
