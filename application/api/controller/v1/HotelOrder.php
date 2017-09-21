@@ -80,7 +80,7 @@ class HotelOrder extends ActiveController
         $params['total_money'] = $params['pay_money']+$params['deduction_money'];//总价
 
         if(isset($params['room_id'])){
-            $room = RoomModel::get(['id'=>$params['room_id'],'house_id'=>$params['hotel_id']]);
+            $room = RoomModel::get(['id'=>$params['room_id'],'hotel_id'=>$params['hotel_id']]);
             if($room){
                 $this->reservation($params['hotel_id'],$params['arrive_time'],$params['leave_time'],$params['room_id']);//单间、写入民宿预订时间
             }else{

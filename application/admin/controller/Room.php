@@ -21,11 +21,11 @@ class Room extends AdminController
      * 前置操作
      */
     protected function  preposition(){
-        $houseId = paramFromGet('house_id');
+        $houseId = paramFromGet('hotel_id');
         if($houseId==null){
             $referer = urldecode(Request::instance()->header('Referer'));
             if($referer){
-                preg_match('/house_id=(?<right>.*)/', $referer, $matches);
+                preg_match('/hotel_id=(?<right>.*)/', $referer, $matches);
                 if($matches){
                     $houseId = $matches[1];
                 }
@@ -36,7 +36,7 @@ class Room extends AdminController
         }
         $typeList = CategoryModel::all(['resource_type'=>1]);
 
-        $this->condition = ['house_id'=>$houseId];
+        $this->condition = ['hotel_id'=>$houseId];
         $this->setAssign(['houseId'=>$houseId,'typeList'=>$typeList]);
     }
 

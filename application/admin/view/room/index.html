@@ -4,7 +4,7 @@
 </style>
 <script>
     function AjaxTime(houseId,roomId){
-        $.get("/api/room_price_calendar?house_id="+houseId+"&room_id="+roomId,function(data) {
+        $.get("/api/room_price_calendar?hotel_id="+houseId+"&room_id="+roomId,function(data) {
             if(data.code==100){
                 pickerEvent.setPriceArr(data.data);
             }
@@ -21,7 +21,7 @@
     </div>
 </div>
 <div class="main_bd">
-    <a class="btn btn_primary" href="/admin/room/create?house_id={$houseId}">添加套间</a>
+    <a class="btn btn_primary" href="/admin/room/create?hotel_id={$houseId}">添加套间</a>
     <table class="goods_list hotel_list">
         <tbody><tr>
             <th>套间ID</th>
@@ -39,8 +39,8 @@
             <td>
                 <input id="calendar_{$model.id}" class="calendar_btn" name="calendar" readonly="readonly" onclick="AjaxTime('{$houseId}','{$model.id}');" placeholder="价格日历"/>
                 <!--<a href="javascript:;" class="md-trigger btn btn-primary btn-sm" data-modal="modal-1">价格日历</a> -->
-                <a class="btn btn_primary" href="/admin/room/edit/id/{$model.id}?house_id={$houseId}">编辑</a>
-                <a class="btn btn_primary" href="/admin/room/delete/id/{$model.id}?house_id={$houseId}">删除</a>
+                <a class="btn btn_primary" href="/admin/room/edit/id/{$model.id}?hotel_id={$houseId}">编辑</a>
+                <a class="btn btn_primary" href="/admin/room/delete/id/{$model.id}?hotel_id={$houseId}">删除</a>
             </td>
         </tr>
         {/volist}

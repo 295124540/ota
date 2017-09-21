@@ -86,7 +86,7 @@ class Hotel extends AdminController
 
                 $picList[] = [
                     'url'=>"/uploads/".$url,
-                    'house_id'=>$house->id,
+                    'hotel_id'=>$house->id,
                     'ismain'=>$status
                 ];
 
@@ -147,7 +147,7 @@ class Hotel extends AdminController
 
                     $picList[] = [
                         'url'=>"/uploads/".$url,
-                        'house_id'=>$house->id,
+                        'hotel_id'=>$house->id,
                         'ismain'=>$status
                     ];
 
