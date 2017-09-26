@@ -1,12 +1,12 @@
 <?php
 namespace app\admin\controller;
 
-use common\controller\AdminController;
-use common\model\Admin as AdminModel;
+use app\common\controller\AdminController;
+use app\common\model\Admin as AdminModel;
 
 class User extends AdminController
 {
-    protected $modelClass = 'common\model\Admin';
+    protected $modelClass = 'app\common\model\Admin';
     protected $authenticate =  ['except'=>'login'];
     /**
      * 首页

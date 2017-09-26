@@ -1,13 +1,13 @@
 <?php
 namespace app\admin\controller;
 
-use common\controller\AdminController;
+use app\common\controller\AdminController;
 use think\Request;
 
 class Order extends AdminController
 {
 
-    protected $modelClass = 'common\model\HotelOrder';
+    protected $modelClass = 'app\common\model\HotelOrder';
     protected $order = 'create_time DESC';
     protected $with = 'user';
 

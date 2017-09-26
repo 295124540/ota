@@ -1,3 +1,0 @@
-<?php
-//000000007200a:20:{s:8:"yunsu_id";i:12142681;s:7:"account";s:11:"13006022705";s:3:"pwd";s:32:"3794b1b90de03e63a5a85c253593a10f";s:8:"nickname";N;s:12:"head_img_url";N;s:5:"phone";s:11:"13006022705";s:5:"email";s:0:"";s:2:"qq";N;s:10:"wx_unionid";N;s:9:"wx_openid";N;s:3:"sex";N;s:3:"age";N;s:7:"country";N;s:8:"province";N;s:4:"city";N;s:5:"point";i:0;s:8:"yun_coin";i:0;s:9:"login_num";N;s:12:"access_token";s:56:"MTNlNjgyMWU3MjRlODU1NGFkMjJkNDYwNTkxM2QyOTYxNDk1NjkyMTM2";s:11:"create_time";s:19:"2017-05-16 08:36:31";}
-?>

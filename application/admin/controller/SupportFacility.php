@@ -7,7 +7,7 @@ use app\common\controller\AdminController;
 class SupportFacility extends AdminController
 {
 
-    protected $modelClass = 'common\model\HotelSupportFacility';
+    protected $modelClass = 'app\common\model\HotelSupportFacility';
 
 
     /**

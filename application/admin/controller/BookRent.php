@@ -1,16 +1,15 @@
 <?php
 namespace app\admin\controller;
 
-use common\controller\AdminController;
+use app\common\controller\AdminController;
 
-use common\model\Admin as AdminModel;
-use common\model\BookHouse as BookHouseModel;
+
 use think\Request;
 
 class BookRent extends AdminController
 {
 
-    protected $modelClass = 'common\model\BookRent';
+    protected $modelClass = 'app\common\model\BookRent';
     protected $order = 'rent_time DESC';
 
     protected function prepareDataProvider()

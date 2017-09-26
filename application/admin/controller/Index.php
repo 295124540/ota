@@ -1,6 +1,6 @@
 <?php
 namespace app\admin\controller;
-use common\controller\AdminController;
+use app\common\controller\AdminController;
 
 class Index extends AdminController{
 

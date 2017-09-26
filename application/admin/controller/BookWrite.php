@@ -3,14 +3,12 @@ namespace app\admin\controller;
 
 use app\common\controller\AdminController;
 
-use common\model\Admin as AdminModel;
-use common\model\BookHouse as BookHouseModel;
-use common\model\BookWriteChapter;
+use app\common\model\BookWriteChapter;
 
 class BookWrite extends AdminController
 {
 
-    protected $modelClass = 'common\model\BookWrite';
+    protected $modelClass = 'app\common\model\BookWrite';
     protected $validate = [
         ['name|书名','require|max:30'],
         ['author|作者','require|max:10'],

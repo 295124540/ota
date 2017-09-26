@@ -3,15 +3,15 @@ namespace app\admin\controller;
 
 use app\common\controller\AdminController;
 
-use common\model\Book as BookModel;
-use common\model\BookHouse as BookHouseModel;
-use common\model\BookModel as BookModelModel;
-use common\model\Category as CategoryModel;
+use app\common\model\Book as BookModel;
+use app\common\model\BookHouse as BookHouseModel;
+use app\common\model\BookModel as BookModelModel;
+use app\common\model\Category as CategoryModel;
 
 class Book extends AdminController
 {
 
-    protected $modelClass = 'common\model\Book';
+    protected $modelClass = 'app\common\model\Book';
     protected $order = 'create_time DESC';
 
     protected function prepareDataProvider()

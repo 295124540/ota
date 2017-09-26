@@ -1,18 +1,14 @@
 <?php
 namespace app\admin\controller;
 
-use common\controller\AdminController;
+use app\common\controller\AdminController;
 
-use common\model\Book as BookModel;
-use common\model\BookHouse as BookHouseModel;
-use common\model\BookModel as BookModelModel;
-use common\model\Category as CategoryModel;
 use think\Request;
 
 class ErrorLog extends AdminController
 {
 
-    protected $modelClass = 'common\model\ErrorLog';
+    protected $modelClass = 'app\common\model\ErrorLog';
     protected $order = 'create_time desc';
 
     protected function prepareDataProvider()

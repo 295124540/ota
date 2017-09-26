@@ -3,13 +3,13 @@ namespace app\admin\controller;
 
 use app\common\controller\AdminController;
 use think\Request;
-use common\model\Category as CategoryModel;
-use common\model\HotelRoom as RoomModel;
+use app\common\model\Category as CategoryModel;
+use app\common\model\HotelRoom as RoomModel;
 
 class Room extends AdminController
 {
 
-    protected $modelClass = 'common\model\HotelRoom';
+    protected $modelClass = 'app\common\model\HotelRoom';
 
     protected $beforeActionList = [
         'preposition'  =>  ['only'=>'index,create,save,edit,update,delete'],

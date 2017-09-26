@@ -2,8 +2,8 @@
 namespace app\admin\controller;
 
 use app\common\controller\AdminController;
-use common\model\Hotel as HotelModel;
-use common\model\HotelSupportFacility as SupportFacilityModel;
+use app\common\model\Hotel as HotelModel;
+use app\common\model\HotelSupportFacility as SupportFacilityModel;
 
 class Hotel extends AdminController
 {

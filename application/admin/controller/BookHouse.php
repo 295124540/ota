@@ -1,11 +1,9 @@
 <?php
 namespace app\admin\controller;
 
-use common\controller\AdminController;
+use app\common\controller\AdminController;
 
-use common\model\Admin as AdminModel;
-use common\model\BookHouse as BookHouseModel;
-use common\model\Category as CategoryModel;
+use app\common\model\Admin as AdminModel;
 
 class BookHouse extends AdminController
 {
