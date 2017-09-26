@@ -10,6 +10,7 @@ class Room extends AdminController
 {
 
     protected $modelClass = 'app\common\model\HotelRoom';
+    protected $with = 'img';
 
     protected $beforeActionList = [
         'preposition'  =>  ['only'=>'index,create,save,edit,update,delete'],
