@@ -1,9 +1,8 @@
 <?php
 namespace app\admin\controller;
 
-use common\controller\AdminController;
+use app\common\controller\AdminController;
 use think\Request;
-use common\model\Hotel as HouseModel;
 use common\model\Category as CategoryModel;
 use common\model\HotelRoom as RoomModel;
 
@@ -62,16 +61,10 @@ class Room extends AdminController
         $files = request()->file('image');
         $picList = array();
         foreach($files as $key=>$file){
-
-            $info = $file->move(ROOT_PATH . 'public' . DS . 'uploads');
-            $filePath =$info->getSaveName();
-            if($info){
-                $picList[] = [
-                    'serial_num'=>$key,
-                    'url'=>"/uploads/".str_replace('\\','/',$filePath)
-                ];
-            }
-
+            $picList[] = [
+                'serial_num'=>$key,
+                'url'=>$this->uploadToAlyun($file)
+            ];
         }
 
         $model = new RoomModel($params);
@@ -96,26 +89,22 @@ class Room extends AdminController
 
         $model = RoomModel::get($id);
         foreach($files as $key=>$file){
-
-            $info = $file->move(ROOT_PATH . 'public' . DS . 'uploads');
-            $filePath =$info->getSaveName();
-            if($info){
-                $url = "/uploads/".str_replace('\\','/',$filePath);
-                if(isset($params['imageId'][$key])){
-                    $list = [
-                        'id'=>$params['imageId'][$key],
-                        'url'=>$url,
-                    ];
-                    $model->img()->update($list);
-                }else{
-                    $picList[] = [
-                        'serial_num'=>$key,
-                        'url'=>$url,
-                    ];
-                }
+            $url = $this->uploadToAlyun($file);
+            if(isset($params['imageId'][$key])){
+                $list = [
+                    'id'=>$params['imageId'][$key],
+                    'url'=>$url,
+                ];
+                $model->img()->update($list);
+            }else{
+                $picList[] = [
+                    'serial_num'=>$key,
+                    'url'=>$url,
+                ];
             }
-
         }
+
+
         $model->allowField(true)->save($params);
         $model->img()->saveAll($picList);
 

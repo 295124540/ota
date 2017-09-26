@@ -39,6 +39,7 @@ return [
         'api/dynamic'=>['api/'.$v.'.dynamic',['only'=>['index','read','create','save','edit','update','delete']]],
         'api/heart_feeling'=>['api/'.$v.'.heart_feeling',['only'=>['index','read','save','delete']]],
         'api/error_log'=>['api/'.$v.'.error_log',['only'=>['index','read','save']]],
+        'api/photo_album'=>['api/'.$v.'.photo_album',['only'=>['index','read','save']]],
 
     ],
 

@@ -1,7 +1,7 @@
 <?php
 namespace app\admin\controller;
 
-use common\controller\AdminController;
+use app\common\controller\AdminController;
 
 use common\model\Admin as AdminModel;
 use common\model\BookHouse as BookHouseModel;
@@ -56,11 +56,7 @@ class BookWrite extends AdminController
         if($model){
 
             $file = request()->file('cover_img');
-            if($file==null)$this->error("没有上传书籍的封面图！");
-            $info = $file->move(ROOT_PATH . 'public' . DS . 'uploads');//移动保存图片
-            if($info==null)$this->error("文件目录没有写入权限！");
-            $filePath =$info->getSaveName();
-            $coverImg = "/uploads/".str_replace('\\','/',$filePath);
+            $coverImg = $this->uploadToAlyun($file);
 
             $model->cover = $coverImg;
             $model->save();
@@ -92,10 +88,7 @@ class BookWrite extends AdminController
             $params = request()->param();
             $file = request()->file('cover_img');
             if($file){
-                $info = $file->move(ROOT_PATH . 'public' . DS . 'uploads');//移动保存图片
-                if($info==null)$this->error("文件目录没有写入权限！");
-                $filePath =$info->getSaveName();
-                $coverImg = "/uploads/".str_replace('\\','/',$filePath);
+                $coverImg = $this->uploadToAlyun($file);
                 $params['cover'] = $coverImg;
             }
 

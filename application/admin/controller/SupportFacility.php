@@ -1,12 +1,8 @@
 <?php
 namespace app\admin\controller;
 
-use common\controller\AdminController;
+use app\common\controller\AdminController;
 
-use common\model\Book as BookModel;
-use common\model\BookHouse as BookHouseModel;
-use common\model\BookModel as BookModelModel;
-use common\model\Category as CategoryModel;
 
 class SupportFacility extends AdminController
 {
@@ -33,12 +29,7 @@ class SupportFacility extends AdminController
         }
 
         $file = request()->file('img');
-        if($file==null)$this->error("没有上传设施图片！");
-        $info = $file->move(ROOT_PATH . 'public' . DS . 'uploads');//移动保存图片
-        if($info==null)$this->error("文件目录没有写入权限！");
-        $filePath =$info->getSaveName();
-        $coverImg = "/uploads/".str_replace('\\','/',$filePath);
-
+        $coverImg = $this->uploadToAlyun($file);
         $params['img'] = $coverImg;
 
         $modelClass = $this->modelClass;
@@ -61,10 +52,7 @@ class SupportFacility extends AdminController
         $params = paramFromPost();
         $file = request()->file('img');
         if($file){
-            $info = $file->move(ROOT_PATH . 'public' . DS . 'uploads');//移动保存图片
-            if($info==null)$this->error("文件目录没有写入权限！");
-            $filePath =$info->getSaveName();
-            $coverImg = "/uploads/".str_replace('\\','/',$filePath);
+            $coverImg = $this->uploadToAlyun($file);
             $params['img']= $coverImg;
         }
 

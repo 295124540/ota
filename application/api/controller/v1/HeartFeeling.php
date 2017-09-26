@@ -16,15 +16,8 @@ class HeartFeeling extends ActiveController
         $files = request()->file();
         if($files==null){error("没收到任何文件！");}
         foreach($files as $key=>$file){
-            $info = $file->move(ROOT_PATH . 'public' . DS . 'uploads');
-            $filePath =$info->getSaveName();
-            if($info){
-                $url = "/uploads/".str_replace('\\','/',$filePath);
-                success($url);
-            }else{
-                // 上传失败获取错误信息
-                $this->error($file->getError());
-            }
+            $url = $this->uploadToAlyun($file);
+            success($url);
         }
     }
 

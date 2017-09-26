@@ -203,17 +203,8 @@
 
             <div class="goods_desc_box form_group">
                 <label>详细介绍</label>
-                <script class="ueditor" id="container" name="describe" type="text/plain">商品简介</script>
-                <script type="text/javascript" src="/ueditor/ueditor.config.js"></script>
-                <!-- 编辑器源码文件 -->
-                <script type="text/javascript" src="/ueditor/ueditor.all.js"></script>
-                <!-- 实例化编辑器 -->
-                <script type="text/javascript">
-                    var ue = UE.getEditor('container', {
-                        // initialFrameWidth:800,
-                        // initialFrameHeight:300
-                    });
-                </script>
+                <script type="text/plain" id="myEditor" name="describe">在这里输入民宿简介！</script>
+                <script type="text/javascript">UM.getEditor('myEditor')</script>
             </div>
             <div class="current_box">
                 <input type="button" name="previous" class="previous btn btn_primary  " value="上一页"/>

@@ -2,13 +2,12 @@
 namespace app\common\controller;
 
 use think\Cache;
-use think\Controller;
 use think\Request;
 use think\Validate;
 use tools\HttpClient;
 
 
-class ApiBaseController extends Controller
+class ApiBaseController extends BaseController
 {
     protected $authenticate; // 身份验证
     protected $accessToken;  // token

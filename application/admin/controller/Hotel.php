@@ -1,7 +1,7 @@
 <?php
 namespace app\admin\controller;
 
-use common\controller\AdminController;
+use app\common\controller\AdminController;
 use common\model\Hotel as HotelModel;
 use common\model\HotelSupportFacility as SupportFacilityModel;
 
@@ -71,21 +71,18 @@ class Hotel extends AdminController
 
         foreach($files as $key=>$file){
 
-            $info = $file->move(ROOT_PATH . 'public' . DS . 'uploads');
-            $filePath =$info->getSaveName();
+            $picUrl =$this->uploadToAlyun($file);
 
-            if($info){
-
-                $url = str_replace('\\','/',$filePath);
+            if($picUrl){
                 $status = count($picList)==0?1:0;//如果是第一个添加的元素就设置为1，其他为0
                 //保存缩略图
                 if($key==0){
-                    $house->thumb = "/uploads/".$url;
+                    $house->thumb = $picUrl;
                     $house->save();
                 }
 
                 $picList[] = [
-                    'url'=>"/uploads/".$url,
+                    'url'=>$picUrl,
                     'hotel_id'=>$house->id,
                     'ismain'=>$status
                 ];
@@ -132,21 +129,19 @@ class Hotel extends AdminController
             $picList = array();
             foreach($files as $key=>$file){
 
-                $info = $file->move(ROOT_PATH . 'public' . DS . 'uploads');
-                $filePath =$info->getSaveName();
+                $picUrl =$this->uploadToAlyun($file);
 
-                if($info){
+                if($picUrl){
 
-                    $url = str_replace('\\','/',$filePath);
                     $status = count($picList)==0?1:0;//如果是第一个添加的元素就设置为1，其他为0
                     //保存缩略图
                     if($key==0){
-                        $house->thumb = "/uploads/".$url;
+                        $house->thumb = $picUrl;
                         $house->save();
                     }
 
                     $picList[] = [
-                        'url'=>"/uploads/".$url,
+                        'url'=>$picUrl,
                         'hotel_id'=>$house->id,
                         'ismain'=>$status
                     ];

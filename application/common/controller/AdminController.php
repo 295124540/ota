@@ -8,11 +8,10 @@
 
 namespace app\common\controller;
 
-use think\Controller;
 use think\Cookie;
 use think\Request;
 
-class AdminController extends Controller
+class AdminController extends BaseController
 {
 
     protected $authenticate;//登录身份鉴定
