@@ -1,7 +1,7 @@
 ﻿/*本代码由素材家园原创，转载请保留网址：www.sucaijiayuan.com*/
 var obj = { date: new Date(), year: -1, month: -1, priceArr: [] };
 var htmlObj = { header: "", left: "", right: "" };
-var houseId = null;
+var hotelId = null;
 var roomId = null;
 var elemId = null;
 var mType = 0;
@@ -55,7 +55,7 @@ function location_y(objectId) {
 }
 
 var pickerEvent = {
-    Init: function (houseid,roomid,elemid,mtype) {
+    Init: function (hotelid,roomid,elemid,mtype) {
         if (obj.year == -1) {
             dateUtil.getCurrent();
         }
@@ -73,7 +73,7 @@ var pickerEvent = {
         html += htmlObj.right;
         html += '<div style="clear: both;"></div>';
         html += "</div></div>";
-        houseId = houseid;
+        hotelId = hotelid;
         roomId = roomid;
         elemId = elemid;
         mType = mtype;
@@ -98,15 +98,15 @@ var pickerEvent = {
     },
     getLast: function () {
         dateUtil.getLastDate();
-        pickerEvent.Init(houseId,roomId,elemId,mType);
+        pickerEvent.Init(hotelid,roomId,elemId,mType);
     },
     getNext: function () {
         dateUtil.getNexDate();
-        pickerEvent.Init(houseId,roomId,elemId,mType);
+        pickerEvent.Init(hotelid,roomId,elemId,mType);
     },
     getToday:function(){
         dateUtil.getCurrent();
-        pickerEvent.Init(houseId,roomId,elemId,mType);
+        pickerEvent.Init(hotelid,roomId,elemId,mType);
     },
     setPriceArr: function (arr) {
         obj.priceArr = arr;
@@ -192,10 +192,10 @@ var dateUtil = {
     },
     //得到一个月的天数
     getLastDay: function () {
-        var new_year = obj.year;//取当前的年份        
-        var new_month = obj.month;//取下一个月的第一天，方便计算（最后一不固定）        
-        var new_date = new Date(new_year, new_month, 1);                //取当年当月中的第一天        
-        return (new Date(new_date.getTime() - 1000 * 60 * 60 * 24)).getDate();//获取当月最后一天日期        
+        var new_year = obj.year;//取当前的年份
+        var new_month = obj.month;//取下一个月的第一天，方便计算（最后一不固定）
+        var new_date = new Date(new_year, new_month, 1);                //取当年当月中的第一天
+        return (new Date(new_date.getTime() - 1000 * 60 * 60 * 24)).getDate();//获取当月最后一天日期
     },
     getCurrent: function () {
         var dt = obj.date;
@@ -304,33 +304,29 @@ var commonUtil = {
             if(mType==1){//如果为整套
                 params = {
                     day:date,
-                    house_id:houseId,
+                    hotel_id:hotelId,
                     type:mType,
                     price:newPrice,
                 };
             }else {
                 params = {
                     day:date,
-                    house_id:houseId,
+                    hotel_id:hotelId,
                     room_id:roomId,
                     price:newPrice,
                 };
             }
 
-            $.post("/api/room_price_calendar",params,function(data,status){
+            $.post("/api/price_calendar",params,function(data,status){
 
                 if(data.code==100){
                     input.hide();
                     $(sender).attr("price",newPrice);
                     $(sender).toggleClass('on');
-
-                    if(calendarPrice.html()){
-                        calendarPrice.show();
-                    }else {
-                        calendarPrice.append("<dfn>¥</dfn>" +$(sender).attr("price")).show();
-                    }
+                    calendarPrice.html("<dfn>¥</dfn>" +$(sender).attr("price")).show();
+                }else {
+                    alert(data.msg);
                 }
-                alert(data.msg);
             });
         })
 

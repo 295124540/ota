@@ -3,12 +3,12 @@
     .calendar_btn{margin-top:10px;padding:0px 5px;height:30px;line-height:30px;border-radius:3px;border:1px solid #ccc;cursor:pointer;text-align:center;}
 </style>
 <script>
-    function AjaxTime(houseId){
-        $.get("/api/room_price_calendar?house_id="+houseId,function(data) {
+    function AjaxTime(hotelId){
+        $.get("/api/price_calendar?hotel_id="+hotelId,function(data) {
             if(data.code==100){
-                pickerEvent.setPriceArr(data.data);
+                pickerEvent.setPriceArr(data.data['price_calendar']);
             }
-            pickerEvent.Init(houseId,houseId,"calendar_"+houseId,1);
+            pickerEvent.Init(hotelId,null,"calendar_"+hotelId,1);
         });
     }
 </script>

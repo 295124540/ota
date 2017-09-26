@@ -15,6 +15,7 @@ use think\Request;
 class Collect extends ActiveController
 {
     protected $modelClass = 'common\model\Collect';
+    protected $authenticate=['only'=>'index,read,save'];
 
     /**
      * 收藏列表

@@ -8,7 +8,7 @@ use common\model\HotelSupportFacility as SupportFacilityModel;
 class Hotel extends AdminController
 {
 
-    protected $modelClass = 'common\model\Hotel';
+    protected $modelClass = 'app\common\model\Hotel';
     protected $beforeActionList = [
         'htmlVariable'  =>  ['only'=>'create,edit'],
     ];
@@ -17,10 +17,9 @@ class Hotel extends AdminController
     {
         parent::_initialize();
         $type = input('get.type');
-        if($type == null){
-            $type = 1;
+        if($type !== null){
+            $this->condition['status'] = $type;
         }
-        $this->condition['status'] = $type;
         $this->setAssign(['type'=>$type]);
     }
 

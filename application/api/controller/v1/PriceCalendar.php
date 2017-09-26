@@ -10,7 +10,7 @@ use app\common\model\HotelReservation;
 class PriceCalendar extends ActiveController
 {
 
-    protected $modelClass = 'common\model\RoomPriceCalendar';
+    protected $modelClass = 'app\common\model\HotelPriceCalendar';
     protected $authenticate = ['except'=>'index,read,save'];
 
     /**

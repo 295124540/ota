@@ -85,12 +85,12 @@ return [
         'item' => [
             [
                 'name' => '智能门锁',
-                'url' => '/admin/house',
+                'url' => '/admin/hotel',
                 'auth_role' => '1,2'
             ],
             [
                 'name' => '二维码打印机',
-                'url' => '/admin/house',
+                'url' => '/admin/hotel',
                 'auth_role' => '1,2'
             ],
         ]
