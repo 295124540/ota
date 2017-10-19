@@ -55,7 +55,6 @@ class User extends AdminController
 
     /**
      * 管理员登录
-     * @return mixed
      */
     public function login()
     {
@@ -113,7 +112,6 @@ class User extends AdminController
 
     /**
      * 管理员列表
-     * @return mixed
      */
     public function getList(){
         $manager = AdminModel::all();

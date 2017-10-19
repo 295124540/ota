@@ -72,8 +72,8 @@ class User extends ApiBaseController
         if($type==1)$f = 'user_id';
         if($data['data']){
             foreach ($data['data'] as $k=>$m){
-                $data['data'][$k]['user']['rent_num'] = BookRent::where(['user_id'=>$m[$f]])->count();
-                $data['data'][$k]['user']['donate_num'] = BookDonate::where(['user_id'=>$m[$f]])->count();
+                $data['data'][$k]['user']['rent_book_num'] = BookRent::where(['user_id'=>$m[$f]])->count();
+                $data['data'][$k]['user']['donate_book_num'] = BookDonate::where(['user_id'=>$m[$f]])->count();
                 $data['data'][$k]['user']['check_in_hotel_num'] = HotelOrder::where(['user_id'=>$m[$f]])->count();
             }
         }

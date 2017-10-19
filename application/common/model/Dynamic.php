@@ -19,7 +19,8 @@ class Dynamic extends Model
      * 用户信息
      */
     public function user(){
-        return $this->hasOne('Users','yunsu_id','user_id');
+        return $this->hasOne('Users','yunsu_id','user_id')
+            ->field('nickname,head_img_url');
     }
 
     /**

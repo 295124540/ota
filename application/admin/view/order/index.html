@@ -46,11 +46,11 @@
             <td>{$model.arrive_time|date='m月d日',###}</td>
             <td>{$model.leave_time|date='m月d日',###}</td>
             <td>{$model.create_time|date='Y-m-d H:i',###}</td>
-            <td>
+            <td align="center">
                 {switch name="model.status" }
                     {case value="3"}
                     <button class="btn btn_primary" onclick="checkOut({$model.hotel_order_id},1)">同意退房</button>
-                    <button class="btn btn_primary"onclick="checkOut({$model.hotel_order_id},2)">扣取押金</button>
+                    <button class="btn btn_primary" style="margin-top: 5px" onclick="checkOut({$model.hotel_order_id},2)">扣取押金</button>
                     {/case}
                     {default /}<a class="btn btn_primary" href="/admin/order/read/id/{$model.hotel_order_id}">详情</a>
                 {/switch}

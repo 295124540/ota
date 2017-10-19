@@ -6,7 +6,7 @@ use app\common\controller\ActiveController;
 class HeartFeeling extends ActiveController
 {
 
-    protected $modelClass = 'common\model\DynamicHeartFeeling';
+    protected $modelClass = 'common\model\HeartFeeling';
     protected $authenticate = ['except'=>'index,read'];
 
     /**
